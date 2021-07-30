@@ -4,8 +4,6 @@ import com.zero_bank.utilities.Driver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LandingPage extends BasePage{
 
@@ -13,52 +11,35 @@ public class LandingPage extends BasePage{
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
+    private static final String HOME_BUTTON = "Account Activity";
+    private static final String ONLINE_BANKING_BUTTON = "Account Summary";
+    private static final String FEEDBACK_BUTTON = "Landing Page";
 
+    @FindBy (xpath = "//strong[text()='Home']")
+    private WebElement homeButton;
 
-    private static final String SIGN_IN_BUTTON = "signInButton";
-    private static final String ADVANCED_LINK = "Advanced";
-    private static final String PROCEED_LINK = "Proceed";
+    @FindBy (xpath = "//strong[text()='Online Banking']")
+    private WebElement onlineBankingButton;
 
-    WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+    @FindBy (xpath = "//strong[text()='Feedback']")
+    private WebElement feedBackButton;
 
-    @FindBy(id = "signin_button")
-    private WebElement signInButton;
-
-    @FindBy (xpath = "//button[@id='details-button']")
-    private WebElement advanced;
-
-    @FindBy (xpath = "//a[@id='proceed-link']")
-    private WebElement proceedLink;
-
-    public void resolveUnsecureConnections(){
-        wait.until(ExpectedConditions.visibilityOf(advanced));
-//        advanced.click();
-        clickOnSomething("Advanced");
-
-        wait.until(ExpectedConditions.visibilityOf(proceedLink));
-//        proceedLink.click();
-        clickOnSomething("Proceed");
-
+    public WebElement getElement(String clickable){
+        switch (clickable){
+            case SIGN_IN_BUTTON: return signInButton;
+            case HOME_BUTTON: return homeButton;
+            case FEEDBACK_BUTTON: return feedBackButton;
+            case ONLINE_BANKING_BUTTON: return onlineBankingButton;
+            default:
+                System.out.println("LandingPage --> getElement() --> wrong input");
+                System.out.println("NullPointerException --> getElement() --> invalid parameter: " + clickable);
+        }
+        return null;
     }
 
     @Override
     public void clickOnSomething(String button) {
-        switch (button){
-            case SIGN_IN_BUTTON:
-                signInButton.click();
-                break;
-            case ADVANCED_LINK:
-                advanced.click();
-                break;
-            case PROCEED_LINK:
-                proceedLink.click();
-                break;
-            case LANDING_PAGE:
-                zeroBankButton.click();
-                break;
-            default:
-                System.out.println("No such button --> void click method in FindTransactions Step_Definitions");
-    }
+        getElement(button).click();
     }
 
 }

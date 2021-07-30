@@ -48,20 +48,21 @@ public class AccountActivityPage extends BasePage {
         toDate.sendKeys(end);
     }
 
-    public void clickOnSomething(String clickable) {
+    public WebElement getElement(String clickable){
         switch (clickable) {
-            case FIND:
-                findButton.click();
-                break;
-            case SHOW_TRANSACTIONS:
-                showTransactions.click();
-                break;
-            case FIND_TRANSACTIONS:
-                findTransactions.click();
-                break;
+            case FIND:              return findButton;
+            case SHOW_TRANSACTIONS: return  showTransactions;
+            case FIND_TRANSACTIONS: return findTransactions;
             default:
-                System.out.println("AccountActivityPage --> clickOnSomething() --> wrong input");
+                System.out.println("AccountActivityPage --> getElement() --> wrong input");
+                System.out.println("NullPointerException --> getElement() --> invalid parameter: " + clickable);
         }
+        return null;
+    }
+
+
+    public void clickOnSomething(String clickable) {
+        getElement(clickable).click();
     }
 
 

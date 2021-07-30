@@ -27,7 +27,7 @@ public class FindTransaction_stepDefinitions {
 
         loginPage = new LoginPage();
         loginPage.performLogin("username", "password");
-        landingPage.resolveUnsecureConnections();
+        loginPage.resolveUnsecureConnections();
     }
 
     @When("the user clicks {string} tab on {string} page")
