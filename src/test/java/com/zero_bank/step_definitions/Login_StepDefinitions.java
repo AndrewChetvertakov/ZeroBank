@@ -80,4 +80,9 @@ public class Login_StepDefinitions {
         if(typeOfTest.equals("Correct")) { ((LoginPage) page).resolveUnsecureConnections(); }
         page.clearObjects();
     }
+    @And("user login to the application successfully")
+    public void userLoginToTheApplicationWithCorrectCredentials(){
+        userLoginToTheApplicationWithCredentialsAnd("Correct" , "username", "password");
+    }
+
 }
