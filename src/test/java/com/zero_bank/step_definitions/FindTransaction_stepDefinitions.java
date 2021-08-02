@@ -40,6 +40,5 @@ public class FindTransaction_stepDefinitions {
         page = BasePage.pageObjectFactory("Account Summary");
         ((AccountActivityPage) page).checkIfDatesAreSorted();
         page.clearObjects();
-
     }
 }
