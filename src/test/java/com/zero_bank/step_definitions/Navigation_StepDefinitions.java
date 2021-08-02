@@ -23,6 +23,7 @@ public class Navigation_StepDefinitions {
             }
         Assert.assertEquals("Titles mismatch!",
         page.navigationHelperTitles(pageName), Driver.getDriver().getTitle());
+        page.clearObjects();
     }
 
     /**

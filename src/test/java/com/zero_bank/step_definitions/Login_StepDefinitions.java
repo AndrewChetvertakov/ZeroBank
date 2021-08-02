@@ -4,6 +4,10 @@ import com.zero_bank.utilities.Driver;
 import com.zero_bank.pages.*;
 import io.cucumber.java.en.*;
 import org.junit.Assert;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import static com.zero_bank.utilities.BrowserUtils.sleep;
 
 public class Login_StepDefinitions {
 
@@ -13,14 +17,18 @@ public class Login_StepDefinitions {
     public void user_logs_out_of_application() {
         page = BasePage.pageObjectFactory("Login Page");
         ((LoginPage) page).performLogOut();
+        page.clearObjects();
     }
 
     @Then("{string} should be displayed on {string}")
     public void shouldBeDisplayedOn(String element, String pageName) {
         page = BasePage.pageObjectFactory(pageName);
-        boolean result = page.getElement(element).isDisplayed();
+        WebElement webElement = page.getElement(element);
+        page.wait.until(ExpectedConditions.visibilityOf(webElement));
+        boolean result = webElement.isDisplayed();
         page.clearObjects();
         Assert.assertTrue(result);
+        sleep(3);
     }
 
     /**
@@ -61,7 +69,6 @@ public class Login_StepDefinitions {
      */
     @And("user login to the application with {string} credentials: {string} and {string}")
     public void userLoginToTheApplicationWithCredentialsAnd(String typeOfTest, String username, String password) {
-        BasePage page;
         page = BasePage.pageObjectFactory("Login Page");
         switch (typeOfTest) {
             case "Invalid":

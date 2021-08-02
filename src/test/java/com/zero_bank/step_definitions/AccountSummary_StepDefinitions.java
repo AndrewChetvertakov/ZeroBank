@@ -18,7 +18,12 @@ public class AccountSummary_StepDefinitions {
         BasePage page = BasePage.pageObjectFactory(paramPage);
         page.clickOnSomething(paramPage);
         String actualTitle = Driver.getDriver().getTitle();
+
+        page.wait.until(ExpectedConditions.titleContains(expectedTitle));
+
+
         Assert.assertEquals("Titles mismatch", expectedTitle, actualTitle);
+        page.clearObjects();
     }
 
     @Then("Account summary page should have to following account types:")

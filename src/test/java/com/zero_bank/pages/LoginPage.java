@@ -104,9 +104,6 @@ public class LoginPage extends BasePage {
 
     /**
      * Helper method for negative login
-     * returns true if error message is displayed
-     * false if message not displayed
-     * should only be used after login attempt
      * @return
      */
     public boolean errorMessageIsDisplayed(){
@@ -117,7 +114,7 @@ public class LoginPage extends BasePage {
         Random random = new Random();
         char[] randomUser = new char[random.nextInt(length) + 1];
         for (int i = 0; i < randomUser.length; i++) {
-            randomUser[i] = (char) random.nextInt(122 - 66);
+            randomUser[i] = (char) (random.nextInt(122) - 66);
         }
         return Arrays.toString(randomUser);
     }

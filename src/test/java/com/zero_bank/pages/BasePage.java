@@ -78,6 +78,13 @@ public abstract class BasePage {
                 case LOGIN_PAGE:
                     PAGE_OBJECT_MAP.put(page, new LoginPage());
                     return PAGE_OBJECT_MAP.get(page);
+                case PAY_BILLS_PAGE:
+                    PAGE_OBJECT_MAP.put(page, new PayBillsPage());
+                    return PAGE_OBJECT_MAP.get(page);
+
+
+
+
 //                "Transfer Funds"
                 default:
                     System.out.println("BasePage --> pageObjectFactory --> Invalid parameter.");
@@ -100,7 +107,7 @@ public abstract class BasePage {
             case LOGOUT_BUTTON:
                 return logOutButton;
             default:
-                System.out.println("BasePage --> getElement() --> wrong input");
+                System.out.println("BasePage --> getElement() --> wrong input" + clickable);
                 System.out.println("NoSuchElementException --> getElement() --> invalid parameter: " + clickable);
                 throw new NoSuchElementException();
         }
