@@ -33,7 +33,6 @@ public class Hooks {
 //        System.out.println("Session id: " + session.toString());
 
         Driver.closeDriver();
-        sleep(2);
     }
 
 //    @Before

@@ -1,7 +1,5 @@
 package com.zero_bank.step_definitions;
 
-
-import com.zero_bank.pages.AccountSummaryPage;
 import com.zero_bank.pages.BasePage;
 import com.zero_bank.utilities.Driver;
 import io.cucumber.java.en.Then;
@@ -27,8 +25,8 @@ public class AccountSummary_StepDefinitions {
     public void account_summary_page_should_have_to_following_account_types(List<String> expectedAccountTypes) {
         page = BasePage.pageObjectFactory("Account Summary");
         page.wait.until(ExpectedConditions.visibilityOf(page.getElement("Random Div")));
-        for (int i = 0; i < expectedAccountTypes.size(); i++) {
-            WebElement element = Driver.getDriver().findElement(By.xpath("//h2[text()='"+expectedAccountTypes.get(i)+"']"));
+        for (String expectedAccountType : expectedAccountTypes) {
+            WebElement element = Driver.getDriver().findElement(By.xpath("//h2[text()='" + expectedAccountType + "']"));
             System.out.println(element.getText() + " is displayed? -> " + element.isDisplayed());
             Assert.assertTrue(element.isDisplayed());
             page.clearObjects();
@@ -39,9 +37,9 @@ public class AccountSummary_StepDefinitions {
     public void credit_accounts_table_must_have_columns(List<String> columns) {
         page = BasePage.pageObjectFactory("Account Summary");
         page.wait.until(ExpectedConditions.visibilityOf(page.getElement("Random Div")));
-        for (int i = 0; i < columns.size(); i++) {
-            WebElement element = Driver.getDriver().
-            findElement(By.xpath("(//table[@class='table'])[3]//th[contains(text(), '"+columns.get(i)+"')]"));
+        for (String column : columns) {
+            WebElement element = Driver.getDriver()
+                .findElement(By.xpath("(//table[@class='table'])[3]//th[contains(text(), '" + column + "')]"));
             System.out.println(element.getText() + " is displayed? -> " + element.isDisplayed());
             Assert.assertTrue(element.isDisplayed());
             page.clearObjects();
