@@ -61,6 +61,8 @@ public class Login_StepDefinitions {
      */
     @And("user login to the application with {string} credentials: {string} and {string}")
     public void userLoginToTheApplicationWithCredentialsAnd(String typeOfTest, String username, String password) {
+        BasePage page;
+        page = BasePage.pageObjectFactory("Login Page");
         switch (typeOfTest) {
             case "Invalid":
                 username = ((LoginPage) page).randomLetters(8);
@@ -74,8 +76,6 @@ public class Login_StepDefinitions {
                 break;
         }
 
-        BasePage page;
-        page = BasePage.pageObjectFactory("Login Page");
         ((LoginPage) page).performLogin(username, password);
         if(typeOfTest.equals("Correct")) { ((LoginPage) page).resolveUnsecureConnections(); }
         page.clearObjects();
