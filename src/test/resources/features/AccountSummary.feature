@@ -1,6 +1,6 @@
 Feature: Account summary
 
-  @smoke @testzz
+  @smoke
   Scenario: Account Summary Page tests
     When user navigates to "Login Page" url
     And user login to the application with "Correct" credentials: "username" and "password"

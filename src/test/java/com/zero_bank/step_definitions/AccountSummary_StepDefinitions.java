@@ -48,9 +48,4 @@ public class AccountSummary_StepDefinitions {
 
     }
 
-
-    @Then("error message Login and or password are wrong should be displayed")
-    public void errorMessageLoginAndOrPasswordAreWrongShouldBeDisplayed() {
-
-    }
 }

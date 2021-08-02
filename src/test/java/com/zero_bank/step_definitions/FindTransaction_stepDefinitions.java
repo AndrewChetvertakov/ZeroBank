@@ -10,8 +10,6 @@ public class FindTransaction_stepDefinitions {
 
     BasePage page;
 
-
-
     @When("the user clicks {string} tab on {string} page")
     public void the_user_enters_date_range_from_to(String button, String pageName) {
         page = BasePage.pageObjectFactory(pageName);
@@ -21,12 +19,11 @@ public class FindTransaction_stepDefinitions {
         page.clearObjects();
     }
 
-
     @When("the user enters date range from {string} to {string}")
     public void theUserEntersDateRangeFromTo(String start, String end) {
         page = BasePage.pageObjectFactory("Account Activity");
         ((AccountActivityPage) page).fillInDates(start, end);
-        ((AccountActivityPage) page).clickOnSomething("Find");
+        page.clickOnSomething("Find");
         page.clearObjects();
     }
 

@@ -27,7 +27,7 @@ public class Navigation_StepDefinitions {
 
     /**
      * This method is used to Navigate to any page by getting a URL
-     * should be used as a precondition to loginto application
+     * should be used as a precondition to log into application mostly
      * URLs are mapped at BasePage
      * @param pageName <-- constant String from BasePage to call page object and url
      */
