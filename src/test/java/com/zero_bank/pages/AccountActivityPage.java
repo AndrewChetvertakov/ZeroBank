@@ -44,7 +44,9 @@ public class AccountActivityPage extends BasePage {
     private List<WebElement> listOfDates;
 
     public void fillInDates(String start, String end) {
+        fromDate.clear();
         fromDate.sendKeys(start);
+        toDate.clear();
         toDate.sendKeys(end);
     }
 

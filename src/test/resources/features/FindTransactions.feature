@@ -1,8 +1,10 @@
 Feature: Find Transactions in Account Activity
  @smoke
   Scenario: Search date range
-    And user navigates to "Landing Page" page
-    And user login to the application
+#    When user navigates to "Landing Page" page
+#    And the user clicks "signInButton" tab on "Landing Page" page
+   When user navigates to "Login Page" url
+    And user login to the application with "Correct" credentials: "username" and "password"
     And user navigates to "Account Activity" page
     Given the user clicks "Find Transactions" tab on "Account Activity" page
     When the user enters date range from "2012-09-01" to "2012-09-06"

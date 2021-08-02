@@ -51,13 +51,64 @@ public class Driver {
         return driverPool.get();
     }
 
-    /*   this method makes sure we have some form of driver session or
-       driver is either null or not null, it MUST exist. */
+    /*
+     This method makes sure we have some form of driver sesion or driver id has.
+     Either null or not null it must exist.
+      */
     public static void closeDriver() {
         if (driverPool.get() != null) {
             driverPool.get().quit();
             driverPool.remove();
         }
     }
+
+//    /*   Making our driver instance private so that it is not reachable from outside of the class
+//   Also we are making it static so that we can use it in a static method.
+//   We want it to run before everything else */
+//    private static WebDriver driver;
+//
+//    /*   Creating reusable utility method that will return same driver instance every time we call it. */
+//    public static WebDriver getDriver(){
+//        if(driver == null){
+//
+//            String browserType = ConfigurationReader.getProperty("browser");
+//
+////            depending on browser type we return the right browser...
+//            switch (browserType){
+//                case "chrome":
+//                    WebDriverManager.chromedriver().setup();
+//                    driver = new ChromeDriver();
+//                    driver.manage().window().maximize();
+//                    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+//                    driver.manage().timeouts().pageLoadTimeout(10,TimeUnit.SECONDS);
+//                    break;
+//                case "firefox":
+//                    WebDriverManager.firefoxdriver().setup();
+//                    driver.manage().window().maximize();
+//                    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+//                    driver.manage().timeouts().pageLoadTimeout(10,TimeUnit.SECONDS);
+//                    break;
+//                case "":
+//
+//            }
+//
+//        }
+//
+//
+//
+//        return driver;
+//    }
+//
+//
+//
+//    /*   this method makes sure we have some form of driver session or
+//       driver is either null or not null, it MUST exist. */
+//    public static void closeDriver(){
+//        if(driver != null){
+//            driver.quit();
+//            driver = null;
+//        }
+//    }
+
 
 }

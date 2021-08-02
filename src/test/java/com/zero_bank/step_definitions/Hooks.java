@@ -27,8 +27,18 @@ public class Hooks {
         }
 
         System.out.println("Teardown steps are being applied");
-        sleep(3);
+
+        Driver.getDriver().manage().deleteAllCookies();
+//        SessionId session =((ChromeDriver) Driver.getDriver()).getSessionId();
+//        System.out.println("Session id: " + session.toString());
+
         Driver.closeDriver();
+        sleep(2);
     }
+
+//    @Before
+//    public void start(){
+//
+//    }
 
 }

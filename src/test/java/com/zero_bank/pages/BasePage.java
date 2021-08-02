@@ -2,9 +2,9 @@ package com.zero_bank.pages;
 
 import com.zero_bank.utilities.Driver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.*;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.util.*;
 
 public abstract class BasePage {
@@ -13,7 +13,7 @@ public abstract class BasePage {
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
-    public static Boolean isLoggedIn = false;
+    public static volatile Boolean isLoggedIn = false;
 
     protected static final String ACCOUNT_ACTIVITY_PAGE = "Account Activity";
     protected static final String ACCOUNT_SUMMARY_PAGE = "Account Summary";
@@ -34,58 +34,80 @@ public abstract class BasePage {
     protected static final String MY_PROFILE_BUTTON = "My Profile";
     protected static final String LOGOUT_BUTTON = "Logout";
 
+    public WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+
     @FindBy(id = "signin_button")
     protected WebElement signInButton;
 
     @FindBy(xpath = "//a[text()='Zero Bank' and @href='/index.html']")
     protected WebElement zeroBankButton;
 
-    @FindBy (xpath = "//a[contains(text(),'Settings')]/../../preceding-sibling::a")
+    @FindBy(xpath = "//a[contains(text(),'Settings')]/../../preceding-sibling::a")
     protected WebElement settingsButton;
 
-    @FindBy (xpath = "//a[contains(text(),'My Profile')]/../../preceding-sibling::a")
+    @FindBy(xpath = "//a[contains(text(),'My Profile')]/../../preceding-sibling::a")
     protected WebElement usernameButton;
 
-    @FindBy (xpath = "//a[contains(text(),'Logout')]")
+    @FindBy(xpath = "//a[contains(text(),'Logout')]")
     protected WebElement logOutButton;
 
-    @FindBy (xpath = "//a[contains(text(),'My Profile')]")
+    @FindBy(xpath = "//a[contains(text(),'My Profile')]")
     protected WebElement myProfileButton;
 
-    public WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+    public abstract void clickOnSomething(String button);
 
-    protected abstract void clickOnSomething(String button);
+    public void clearObjects(){
+        PAGE_OBJECT_MAP.clear();
+    }
 
-    public BasePage pageObjectFactory(String page) {
-        switch (page) {
-            case ACCOUNT_ACTIVITY_PAGE:
-                return new AccountActivityPage();
-            case ACCOUNT_SUMMARY_PAGE:
-                return new AccountSummaryPage();
-            case LANDING_PAGE:
-                return new LandingPage();
-            case LOGIN_PAGE:
-                return new LoginPage();
-            default:
-                System.out.println("BasePage --> pageObjectFactory --> Invalid parameter.");
-                System.out.println("NullPointer from pageObjectFactory");
-                return null;
+    private static final Map<String, BasePage> PAGE_OBJECT_MAP = new HashMap<>();
+
+    public static BasePage pageObjectFactory(String page) {
+        if (PAGE_OBJECT_MAP.containsKey(page)) return PAGE_OBJECT_MAP.get(page);
+        else {
+
+            switch (page) {
+                case ACCOUNT_ACTIVITY_PAGE:
+                    PAGE_OBJECT_MAP.put(page, new AccountActivityPage());
+                    return PAGE_OBJECT_MAP.get(page);
+
+                case ACCOUNT_SUMMARY_PAGE:
+                    PAGE_OBJECT_MAP.put(page, new AccountSummaryPage());
+                    return PAGE_OBJECT_MAP.get(page);
+
+                case LANDING_PAGE:
+                    PAGE_OBJECT_MAP.put(page, new LandingPage());
+                    return PAGE_OBJECT_MAP.get(page);
+
+                case LOGIN_PAGE:
+                    PAGE_OBJECT_MAP.put(page, new LoginPage());
+                    return PAGE_OBJECT_MAP.get(page);
+//                "Transfer Funds"
+                default:
+                    System.out.println("BasePage --> pageObjectFactory --> Invalid parameter.");
+                    System.out.println("NullPointer from pageObjectFactory");
+                    throw new NullPointerException();
+            }
         }
     }
 
-    public WebElement getElement(String clickable){
-        switch (clickable){
-            case ZERO_BANK_BUTTON: return zeroBankButton;
-            case SETTINGS_DROPDOWN: return settingsButton;
-            case USERNAME_DROPDOWN: return usernameButton;
-            case MY_PROFILE_BUTTON: return myProfileButton;
-            case LOGOUT_BUTTON: return logOutButton;
-
+    public WebElement getElement(String clickable) {
+        switch (clickable) {
+            case ZERO_BANK_BUTTON:
+                return zeroBankButton;
+            case SETTINGS_DROPDOWN:
+                return settingsButton;
+            case USERNAME_DROPDOWN:
+                return usernameButton;
+            case MY_PROFILE_BUTTON:
+                return myProfileButton;
+            case LOGOUT_BUTTON:
+                return logOutButton;
             default:
                 System.out.println("BasePage --> getElement() --> wrong input");
                 System.out.println("NullPointerException --> getElement() --> invalid parameter: " + clickable);
+                throw new NoSuchElementException();
         }
-        return null;
     }
 
     public void clickOnAnyButtonOnAnyPage(String page, String button) {
@@ -95,7 +117,7 @@ public abstract class BasePage {
     protected static final List<String> titles = new ArrayList<>();
     protected static final List<String> urls = new ArrayList<>();
 
-    private List<String> populateTitles(){
+    private List<String> populateTitles() {
         if (titles.isEmpty()) {
             titles.addAll(Arrays.asList(
                     "Zero - Account Activity",
@@ -113,7 +135,7 @@ public abstract class BasePage {
         return titles;
     }
 
-    private List<String> populateUrls(){
+    private List<String> populateUrls() {
         if (urls.isEmpty()) {
             urls.addAll(Arrays.asList(
                     "http://zero.webappsecurity.com/bank/account-activity.html",
@@ -169,8 +191,8 @@ public abstract class BasePage {
                 title = populateTitles().get(10);
                 break;
             default:
-                title = "BasePage --> navigationHelperTitles() --> wrong parameter";
-                System.out.println("StringNullPointerException --> BasePage --> navigationHelperTitles() --> wrong parameter");
+                System.out.println("IllegalArgumentException --> BasePage --> navigationHelperTitles() --> wrong parameter");
+                throw new IllegalArgumentException();
         }
         return title;
     }
@@ -212,8 +234,8 @@ public abstract class BasePage {
                 url = populateUrls().get(10);
                 break;
             default:
-                url = "BasePage --> navigationHelperUrls() --> wrong parameter";
-                System.out.println("StringNullPointerException --> BasePage --> navigationHelperUrls() --> wrong parameter");
+                System.out.println("IllegalArgumentException --> BasePage --> navigationHelperUrls() --> wrong parameter");
+                throw new IllegalArgumentException();
         }
         return url;
     }
