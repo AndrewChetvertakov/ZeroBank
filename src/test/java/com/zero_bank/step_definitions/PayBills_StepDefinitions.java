@@ -1,13 +1,13 @@
 package com.zero_bank.step_definitions;
 
 import com.github.javafaker.Faker;
-import com.zero_bank.pages.BasePage;
-import com.zero_bank.pages.PayBillsPage;
-import com.zero_bank.utilities.BrowserUtils;
-import com.zero_bank.utilities.Driver;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
+import com.zero_bank.pages.*;
+import com.zero_bank.utilities.*;
+import io.cucumber.java.en.*;
 import org.junit.Assert;
+import org.openqa.selenium.*;
+
+import java.util.Map;
 
 public class PayBills_StepDefinitions {
 
@@ -69,5 +69,17 @@ public class PayBills_StepDefinitions {
         page.clearObjects();
     }
 
+    /** This method fills in information for creating New Payee on Pay Bills page
+     * @param data - Map<key, value> where key is used to concatenate locator of input field
+     *             and value is used in sendkeys(value)     */
+    @And("the user creates new payee using following information:")
+    public void theUserCreatesNewPayeeUsingFollowingInformation(Map<String, String> data){
+        page = BasePage.pageObjectFactory("Pay Bills");
+        for (String key: data.keySet()) {
+            WebElement element = Driver.getDriver().findElement(By.xpath("//*[contains(@id, 'np_new_payee_"+key+"')]"));
+            element.sendKeys(data.get(key));
+        }
+        page.clearObjects();
+    }
 
 }

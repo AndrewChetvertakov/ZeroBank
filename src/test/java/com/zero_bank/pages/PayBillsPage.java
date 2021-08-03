@@ -7,19 +7,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import java.util.NoSuchElementException;
 import java.util.Random;
 
 public class PayBillsPage extends BasePage{
 
     public PayBillsPage(){
         PageFactory.initElements(Driver.getDriver(), this); }
-
-    @Override
-    public void clickOnSomething(String button) {
-
-    }
 
     private static final String PAY_SAVED_PAYEE = "Pay Saved Payee";
     private static final String ADD_NEW_PAYEE = "Add New Payee";
@@ -32,17 +25,19 @@ public class PayBillsPage extends BasePage{
     private static final String DATE_INPUT_FIELD = "Date";
     private static final String DESCRIPTION_INPUT_FIELD = "Description";
     private static final String PAYMENT_SUCCESS_MESSAGE = "The payment was successfully submitted.";
-    private static final String PAYMENT_FILL_OUT_MESSAGE = "Please fill out this field message";
+    private static final String NEW_PAYEE_CREATED_MESSAGE = "The new payee Pew was successfully created.";
     private static final String CALENDAR_POPUP = "Calendar";
     private static final String PAY_BUTTON = "Pay Button";
+    private static final String ADD_BUTTON = "Add";
 
-
+    @FindBy (id = "add_new_payee")
+    private WebElement addButton;
 
     @FindBy (xpath = "//span[contains(text(), 'The payment was successfully submitted.')]")
     private WebElement paymentSuccessMessage;
 
-//    @FindBy (xpath = "//span[contains(text(), 'The payment was successfully submitted.')]")
-//    private WebElement paymentFillOutMessage;
+    @FindBy (id = "alert_content")
+    private WebElement newPayeeCreatedMessage;
 
     @FindBy (xpath = "//a[contains(text(), 'Pay Saved Payee')]")
     private WebElement paySavedPayee;
@@ -74,6 +69,9 @@ public class PayBillsPage extends BasePage{
     @FindBy (xpath = "//input[@id='pay_saved_payees']")
     private WebElement payButton;
 
+    public void clickOnSomething(String clickable){
+        getElement(clickable).click();
+    }
 
     public void clickOnAnyButtonOnAnyPage(String page, String button) {
         pageObjectFactory(page).clickOnSomething(button);
@@ -83,47 +81,33 @@ public class PayBillsPage extends BasePage{
         switch (clickable) {
             case PAY_SAVED_PAYEE:
                 return paySavedPayee;
-
             case ADD_NEW_PAYEE:
                 return addNewPayee;
-
             case PURCHASE_FOREIGN_CURRENCY:
                 return purchaseForeignCurrency;
-
             case PAYEE_SELECT:
                 return PayeeSelect;
-
             case ACCOUNT_SELECT:
                 return AccountSelect;
-
             case AMOUNT_INPUT_FIELD:
                 return amountInputField;
-
             case DATE_INPUT_FIELD:
                 return dateInputField;
-
             case DESCRIPTION_INPUT_FIELD:
                 return descriptionInputField;
-
             case PAYMENT_SUCCESS_MESSAGE:
                 return paymentSuccessMessage;
-
-//            case PAYMENT_FILL_OUT_MESSAGE:
-//                return paymentFillOutMessage;
-
+            case NEW_PAYEE_CREATED_MESSAGE:
+                return newPayeeCreatedMessage;
             case CALENDAR_POPUP:
                 return calendar;
-
             case PAY_BUTTON:
                 return payButton;
-
-
-
+            case ADD_BUTTON:
+                return addButton;
             default:
-                super.getElement(clickable);
+                return super.getElement(clickable);
         }
-        System.out.println("PayBillsPage -> getElement -> invalid parameter: " + clickable);
-        throw new NoSuchElementException();
     }
 
     public void fillDataForPaySavedPayee(String payeeSelValue, String accSelValue, String number, String date, String description) {
@@ -134,8 +118,6 @@ public class PayBillsPage extends BasePage{
         wait.until(ExpectedConditions.invisibilityOf(getElement(CALENDAR_POPUP)));
         getElement(DESCRIPTION_INPUT_FIELD).sendKeys(description + Keys.ENTER);
     }
-
-
 
     public int generateNumber(int length){
         int result = 0;

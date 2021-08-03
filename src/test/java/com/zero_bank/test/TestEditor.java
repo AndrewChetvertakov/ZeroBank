@@ -6,19 +6,19 @@ public class TestEditor {
 
 
 
-        String story = "Scenario:\tType\n" +
-                "Given\tthe\tuser\taccesses\tthe\tFind\tTransactions\ttab\n" +
-                "And\tclicks\tsearch\n" +
-                "Then\tresults\ttable\tshould\tshow\tat\tleast\tone\tresult\tunder\tDeposit\n" +
-                "Then\tresults\ttable\tshould\tshow\tat\tleast\tone\tresult\tunder\tWithdrawal\n" +
-                "When\tuser\tselects\ttype\t“Deposit”\n" +
-                "Then\tresults\ttable\tshould\tshow\tat\tleast\tone\tresult\tunder\tDeposit\n" +
-                "But\tresults\ttable\tshould\tshow\tno\tresult\tunder\tWithdrawal\n" +
-                "When\tuser\tselects\ttype\t“Withdrawal”\n" +
-                "Then\tresults\ttable\tshould\tshow\tat\tleast\tone\tresult\tunder\tWithdrawal\n" +
-                "But\tresults\ttable\tshould\tshow\tno\tresult\tunder\tDeposit";
+        String story = "Add\tNew\tPayee.feature\n" +
+                "Feature:\tAdd\tnew\tpayee\tunder\tpay\tbills\n" +
+                "Scenario:\tAdd\ta\tnew\tpayee\n" +
+                "Given Add New Payee tab\n" +
+                "And creates\tnew\tpayee\tusing following\tinformation\t\n" +
+                "|Payee\tName | The\tLaw\tOffices\tof\tHyde,\tPrice\t&\tScharks|\n" +
+                "|Payee\tAddress | 100\tSame st,\tAnytown,\tUSA,\t10001 |\n" +
+                "|Account | Checking |\n" +
+                "|Payee\tdetails | XYZ\taccount |\n" +
+                "Then message\tThe\tnew\tpayee\tThe\tLaw\tOffices\tof\tHyde,\tPrice\t&\tScharks\twas\t\n" +
+                "successfully\tcreated. should\tbe\tdisplayed\n";
 
-        System.out.println(story.replace("\t", " "));
+        System.out.println(story.replace("\t", " ").replace("“","\"").replace("”","\""));
 
     }
 }

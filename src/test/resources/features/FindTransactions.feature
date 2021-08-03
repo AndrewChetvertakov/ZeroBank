@@ -33,3 +33,27 @@ Feature: Find Transactions in Account Activity
       | Withdrawal    | at least  | 1      | Withdrawal |
       | Withdrawal    | only      | 0      | Deposit    |
 
+  @smoke
+  Scenario Outline: Search by description validation
+    When user enters description "<description>"
+    And the user clicks "Find" tab on "Account Activity" page
+    Then results table should only show results containing "<result>" keyword
+    Examples:
+      | description | result   |
+      | ONLINE      | ONLINE   |
+      | TRANSFER    | TRANSFER |
+      | OFFICE      | OFFICE   |
+      | SUPPLY      | SUPPLY   |
+
+  @smoke
+  Scenario Outline: Search by description validation when no matching results found
+    When user enters description "<description>"
+    And the user clicks "Find" tab on "Account Activity" page
+    Then "No Results Message" should be displayed on "Account Activity"
+    Examples:
+      | description |
+      | online      |
+      | office      |
+      | whatever    |
+
+

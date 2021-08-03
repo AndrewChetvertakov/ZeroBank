@@ -25,3 +25,27 @@ Feature: Pay Bills Functionalities Tests
 
 #  "Amount field"  should not accept "alphabetical"  or special characters. <== it very well accepts alphabet
 #  "Date field"    should not accept "alphabetical characters".
+
+
+  Scenario: Add a new payee under pay bills
+    Given the user clicks "Add New Payee" link on "Pay Bills" page
+    And the user creates new payee using following information:
+      | name    | The Law Offices of Hyde, Price & Scharks |
+      | address | 100 Same st, Anytown, USA, 10001         |
+      | account | Checking                                 |
+      | details | XYZ account                              |
+    Given the user clicks "Add" tab on "Pay Bills" page
+    Then "The new payee Pew was successfully created." should be displayed on "Pay Bills"
+
+
+
+
+
+
+
+
+
+
+
+
+

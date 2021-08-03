@@ -20,6 +20,15 @@ public class AccountActivityPage extends BasePage {
     protected static final String FIND_TRANSACTIONS = "Find Transactions";
     private static final String FIND = "Find";
     private static final String TYPE_SELECT = "Type Select";
+    private static final String DESCRIPTION_FIELD = "Description";
+    private static final String NO_RESULTS_MESSAGE = "No Results Message";
+
+
+    @FindBy (xpath = "//div[contains(text(), 'No results.')]")
+    private WebElement noResultsMessage;
+
+    @FindBy (id = "aa_description")
+    private WebElement descriptionField;
 
     @FindBy (id = "aa_type")
     private WebElement typeSelect;
@@ -62,9 +71,11 @@ public class AccountActivityPage extends BasePage {
                 return findTransactions;
             case TYPE_SELECT:
                 return typeSelect;
+            case DESCRIPTION_FIELD:
+                return descriptionField;
+            case NO_RESULTS_MESSAGE:
+                return noResultsMessage;
             default:
-//                System.out.println("AccountActivityPage --> getElement() --> wrong input");
-//                System.out.println("NullPointerException --> getElement() --> invalid parameter: " + clickable);
                 super.getElement(clickable);
         }
         return null;

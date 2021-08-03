@@ -1,14 +1,12 @@
 package com.zero_bank.step_definitions;
 
+import com.sun.xml.internal.bind.v2.TODO;
 import com.zero_bank.pages.*;
-import com.zero_bank.utilities.BrowserUtils;
-import com.zero_bank.utilities.Driver;
+import com.zero_bank.utilities.*;
 import io.cucumber.java.en.*;
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -16,11 +14,10 @@ public class FindTransaction_stepDefinitions {
 
     BasePage page;
 
-
     /** This method clicks on any WebElement on any page:
      * @param button - name of WebElement exactly as a String constant from POM for .getElement()
-     * @param pageName - name of any page exactly as a String constant from Pom for pageObjectFactory() */
-    @When("the user clicks {string} tab on {string} page")
+     * @param pageName - name of any page exactly as a String constant from Pom for .pageObjectFactory() */
+    @When("the user clicks {string} tab/link/button on {string} page")
     public void the_user_enters_date_range_from_to(String button, String pageName) {
         page = BasePage.pageObjectFactory(pageName);
         WebElement element = page.getElement(button);
@@ -86,7 +83,7 @@ public class FindTransaction_stepDefinitions {
         listOfTransactions.clear();
     }
 
-
+    //TODO finish the method to assert dates are sorted
     @And("the results should be sorted by most recent date")
     public void theResultsShouldBeSortedByMostRecentDate() {
 //        finish THIS
@@ -94,5 +91,37 @@ public class FindTransaction_stepDefinitions {
         ((AccountActivityPage) page).checkIfDatesAreSorted();
         page.clearObjects();
     }
+
+    /** This method will send argument to description field
+     * on Account Activity page and Find Transactions tab
+     * @param description - keyword to search by description     */
+    @When("user enters description {string}")
+    public void userEntersDescription(String description) {
+        page = BasePage.pageObjectFactory("Account Activity");
+        page.getElement("Description").clear();
+        page.getElement("Description").sendKeys(description);
+        page.clearObjects();
+    }
+
+    /** This methid will assert search results on
+     * Account Activity page and Find Transactions table
+     * @param expectedResult - expected result     */
+    @Then("results table should only show results containing {string} keyword")
+    public void resultsTableShouldOnlyShowResultsContainingKeyword(String expectedResult) {
+        page = BasePage.pageObjectFactory("Account Activity");
+        List<String>  listOfTransactions = Driver.getDriver().findElements(By.xpath(
+            "//div[contains(@id, 'filtered_')]/table/thead/tr/th/../../following-sibling::tbody/tr/td[2]"))
+            .stream().map(WebElement::getText)
+            .filter(text -> !text.equals(""))
+            .collect(Collectors.toList());
+        for (String each : listOfTransactions) {
+            Assert.assertTrue(each.contains(expectedResult));
+        }
+        if(listOfTransactions.isEmpty()) {
+            Assert.assertTrue(true); // <--if list is empty and loop doesn't run
+            System.out.println("No matching search results found.");
+        }
+    }
+
 
 }
