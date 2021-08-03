@@ -26,7 +26,7 @@ Feature: Pay Bills Functionalities Tests
 #  "Amount field"  should not accept "alphabetical"  or special characters. <== it very well accepts alphabet
 #  "Date field"    should not accept "alphabetical characters".
 
-
+  @smoke
   Scenario: Add a new payee under pay bills
     Given the user clicks "Add New Payee" link on "Pay Bills" page
     And the user creates new payee using following information:
