@@ -1,11 +1,5 @@
 package com.zero_bank.test;
 
-import com.zero_bank.pages.AccountActivityPage;
-import com.zero_bank.step_definitions.Navigation_StepDefinitions;
-import com.zero_bank.utilities.Driver;
-import org.junit.Test;
-import org.openqa.selenium.By;
-
 import java.util.Random;
 
 public class TestTwo {
@@ -35,14 +29,8 @@ public class TestTwo {
         System.out.println(generateDate());
         System.out.println(generateDate());
 
-
-
-
-
-
-
-
     }
+
     public static String generateDate(){
         Random random = new Random();
         StringBuilder builder = new StringBuilder();

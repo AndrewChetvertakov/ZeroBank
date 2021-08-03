@@ -69,15 +69,19 @@ public abstract class BasePage {
                 case ACCOUNT_ACTIVITY_PAGE:
                     PAGE_OBJECT_MAP.put(page, new AccountActivityPage());
                     return PAGE_OBJECT_MAP.get(page);
+
                 case ACCOUNT_SUMMARY_PAGE:
                     PAGE_OBJECT_MAP.put(page, new AccountSummaryPage());
                     return PAGE_OBJECT_MAP.get(page);
+
                 case LANDING_PAGE:
                     PAGE_OBJECT_MAP.put(page, new LandingPage());
                     return PAGE_OBJECT_MAP.get(page);
+
                 case LOGIN_PAGE:
                     PAGE_OBJECT_MAP.put(page, new LoginPage());
                     return PAGE_OBJECT_MAP.get(page);
+
                 case PAY_BILLS_PAGE:
                     PAGE_OBJECT_MAP.put(page, new PayBillsPage());
                     return PAGE_OBJECT_MAP.get(page);
@@ -107,7 +111,7 @@ public abstract class BasePage {
             case LOGOUT_BUTTON:
                 return logOutButton;
             default:
-                System.out.println("BasePage --> getElement() --> wrong input" + clickable);
+                System.out.println("BasePage --> getElement() --> wrong input " + clickable);
                 System.out.println("NoSuchElementException --> getElement() --> invalid parameter: " + clickable);
                 throw new NoSuchElementException();
         }

@@ -6,14 +6,17 @@ public class TestEditor {
 
 
 
-        String story = " Pay\tBills\n" +
-                "Account\tActivity\tpage\tshould\thave\tthe\ttitle\tZero\t– Pay\tBills.\tWhen\tuser\tcompletes\ta\n" +
-                "successful\tPay\toperation,\tThe\tpayment\twas\tsuccessfully\tsubmitted.\tshould\tbe\n" +
-                "displayed.\tWhen\tuser\ttries\tto\tmake\ta\tpayment\twithout\tentering\tthe\tamount\tor\tdate,\n" +
-                "Please\tfill\tout\tthis\tfield\tmessage! should\tbe\tdisplayed.\n" +
-                "Amount\tfield\tshould\tnot\taccept\talphabetical\tor\tspecial\tcharacters.\tDate\tfield\tshould\n" +
-                "not\taccept\talphabetical\tcharacters.\n" +
-                "NOTE:\t.\tFor\tthe\tdate\tinput\tfield\tyou\tcan\tjust\tuse\tsendKeys.\tNo\tneed\tto\tclick\ton\tthe\tdate\tnavigator.";
+        String story = "Scenario:\tType\n" +
+                "Given\tthe\tuser\taccesses\tthe\tFind\tTransactions\ttab\n" +
+                "And\tclicks\tsearch\n" +
+                "Then\tresults\ttable\tshould\tshow\tat\tleast\tone\tresult\tunder\tDeposit\n" +
+                "Then\tresults\ttable\tshould\tshow\tat\tleast\tone\tresult\tunder\tWithdrawal\n" +
+                "When\tuser\tselects\ttype\t“Deposit”\n" +
+                "Then\tresults\ttable\tshould\tshow\tat\tleast\tone\tresult\tunder\tDeposit\n" +
+                "But\tresults\ttable\tshould\tshow\tno\tresult\tunder\tWithdrawal\n" +
+                "When\tuser\tselects\ttype\t“Withdrawal”\n" +
+                "Then\tresults\ttable\tshould\tshow\tat\tleast\tone\tresult\tunder\tWithdrawal\n" +
+                "But\tresults\ttable\tshould\tshow\tno\tresult\tunder\tDeposit";
 
         System.out.println(story.replace("\t", " "));
 

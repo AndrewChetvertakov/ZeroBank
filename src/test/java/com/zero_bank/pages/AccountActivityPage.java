@@ -16,11 +16,13 @@ public class AccountActivityPage extends BasePage {
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
-    public static final String ACCOUNT_ACTIVITY_PAGE_TITLE = "http://zero.webappsecurity.com/bank/account-activity.html";
-
     protected static final String SHOW_TRANSACTIONS = "showTransactions";
     protected static final String FIND_TRANSACTIONS = "Find Transactions";
     private static final String FIND = "Find";
+    private static final String TYPE_SELECT = "Type Select";
+
+    @FindBy (id = "aa_type")
+    private WebElement typeSelect;
 
     @FindBy(xpath = "//input[@id='aa_fromDate']")
     private WebElement fromDate;
@@ -52,41 +54,40 @@ public class AccountActivityPage extends BasePage {
 
     public WebElement getElement(String clickable){
         switch (clickable) {
-            case FIND:              return findButton;
-            case SHOW_TRANSACTIONS: return  showTransactions;
-            case FIND_TRANSACTIONS: return findTransactions;
+            case FIND:
+                return findButton;
+            case SHOW_TRANSACTIONS:
+                return showTransactions;
+            case FIND_TRANSACTIONS:
+                return findTransactions;
+            case TYPE_SELECT:
+                return typeSelect;
             default:
-                System.out.println("AccountActivityPage --> getElement() --> wrong input");
-                System.out.println("NullPointerException --> getElement() --> invalid parameter: " + clickable);
+//                System.out.println("AccountActivityPage --> getElement() --> wrong input");
+//                System.out.println("NullPointerException --> getElement() --> invalid parameter: " + clickable);
+                super.getElement(clickable);
         }
         return null;
     }
-
 
     public void clickOnSomething(String clickable) {
         getElement(clickable).click();
     }
 
-
     public boolean checkRangeOfDates(String start, String end) {
         wait.until(ExpectedConditions.visibilityOf(filteredTransactionsTableBackground));
-
         List<String> strings = listOfDates
                 .stream()
-                .map(WebElement::getText).collect(Collectors.toList());
-
+                .map(WebElement::getText)
+                .collect(Collectors.toList());
         int[] startInt = BrowserUtils.stringToIntArray(start);
         int[] endInt = BrowserUtils.stringToIntArray(end);
-
-        for (int i = 0; i < strings.size(); i++) {
-            int[] actual = BrowserUtils.stringToIntArray(strings.get(i));
+        for (String string : strings) {
+            int[] actual = BrowserUtils.stringToIntArray(string);
             for (int j = 0; j < 3; j++) {
-//                System.out.println(actual[j] +" < "+startInt[j] + " && "+ actual[j]+" > "+ endInt[j] + " " +
-//                        (actual[j] < startInt[j] && actual[j] > endInt[j]));
                 if (actual[j] < startInt[j] && actual[j] > endInt[j]) return false;
             }
         }
-
         return true;
     }
 

@@ -7,12 +7,12 @@ import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import static com.zero_bank.utilities.BrowserUtils.sleep;
-
 public class Login_StepDefinitions {
 
     BasePage page;
 
+    /** This method will perform log out of the application
+     * Precondition: user has to be logged in, or Exception happens */
     @When("user logs out of application")
     public void user_logs_out_of_application() {
         page = BasePage.pageObjectFactory("Login Page");
@@ -20,6 +20,9 @@ public class Login_StepDefinitions {
         page.clearObjects();
     }
 
+    /** Dynamic method to assert specified element.isDisplayed on specified page
+     *  @param element - name of element for getElement() method
+     *  @param pageName - name of page to get an object from pageFactory()   */
     @Then("{string} should be displayed on {string}")
     public void shouldBeDisplayedOn(String element, String pageName) {
         page = BasePage.pageObjectFactory(pageName);
@@ -28,13 +31,11 @@ public class Login_StepDefinitions {
         boolean result = webElement.isDisplayed();
         page.clearObjects();
         Assert.assertTrue(result);
-        sleep(3);
     }
 
-    /**
-     * This method generates random username and password with specified length
-     * And attempts to log in with random credentials
-     */
+    /** This method generates random username and password with specified length
+     *  And attempts to log in with these generated credentials
+     *  And does an assertion through title comparison */
     @When("user tries to login with invalid information")
     public void userTriesToLoginWithInvalidInformation() {
         page = BasePage.pageObjectFactory("Login Page");
@@ -49,6 +50,8 @@ public class Login_StepDefinitions {
         Assert.assertEquals("Titles mismatch!", expectedTitle, actualTitle);
     }
 
+    /** This method attempts to login with empty username and password
+     *  And does an assertion through title comparison */
     @When("user tries to login without entering credentials")
     public void userTriesToLoginWithoutEnteringCredentials() {
         page = BasePage.pageObjectFactory("Login Page");
@@ -61,8 +64,7 @@ public class Login_StepDefinitions {
         Assert.assertEquals("Titles mismatch!", expectedTitle, actualTitle);
     }
 
-    /**
-     *
+    /** This method does positive or negative login depending on parameter typeOfTest
      * @param typeOfTest "Correct"   or   "Invalid"   or    "Blank"
      * @param username - CorrectUN         random              ""
      * @param password - CorrectPass       random              ""
@@ -82,11 +84,12 @@ public class Login_StepDefinitions {
                 password = "";
                 break;
         }
-
         ((LoginPage) page).performLogin(username, password);
         if(typeOfTest.equals("Correct")) { ((LoginPage) page).resolveUnsecureConnections(); }
         page.clearObjects();
     }
+
+    /** Wrapper method for successful login with "username" and "password" credentials   */
     @And("user login to the application successfully")
     public void userLoginToTheApplicationWithCorrectCredentials(){
         userLoginToTheApplicationWithCredentialsAnd("Correct" , "username", "password");

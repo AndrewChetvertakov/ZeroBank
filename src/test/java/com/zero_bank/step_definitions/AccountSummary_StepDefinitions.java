@@ -13,19 +13,20 @@ public class AccountSummary_StepDefinitions {
 
     BasePage page;
 
+    /** This method asserts current title of current page versus expected title from Cukes parameter
+     * @param paramPage - name of the Page for expected title retrieval
+     * @param expectedTitle - expected title from Cukes parameter     */
     @Then("{string} page title should be {string}")
     public void page_title_should_be(String paramPage, String expectedTitle) {
         BasePage page = BasePage.pageObjectFactory(paramPage);
-        page.clickOnSomething(paramPage);
         String actualTitle = Driver.getDriver().getTitle();
-
         page.wait.until(ExpectedConditions.titleContains(expectedTitle));
-
-
         Assert.assertEquals("Titles mismatch", expectedTitle, actualTitle);
         page.clearObjects();
     }
 
+    /** This method checks if all the elements from Cukes parameter are displayed on the page
+     * @param expectedAccountTypes - List of expected values that are displayed    */
     @Then("Account summary page should have to following account types:")
     public void account_summary_page_should_have_to_following_account_types(List<String> expectedAccountTypes) {
         page = BasePage.pageObjectFactory("Account Summary");
@@ -38,6 +39,8 @@ public class AccountSummary_StepDefinitions {
         }
     }
 
+    /** This method checks if all the elements from Cukes parameter are displayed on the page
+     * @param columns - List of expected values that are displayed     */
     @Then("Credit Accounts table must have columns:")
     public void credit_accounts_table_must_have_columns(List<String> columns) {
         page = BasePage.pageObjectFactory("Account Summary");
@@ -49,8 +52,6 @@ public class AccountSummary_StepDefinitions {
             Assert.assertTrue(element.isDisplayed());
             page.clearObjects();
         }
-
-
     }
 
 }
