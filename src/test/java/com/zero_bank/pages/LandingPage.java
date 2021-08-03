@@ -31,11 +31,8 @@ public class LandingPage extends BasePage{
             case FEEDBACK_BUTTON: return feedBackButton;
             case ONLINE_BANKING_BUTTON: return onlineBankingButton;
             default:
-                super.getElement(clickable);
-//                System.out.println("LandingPage --> getElement() --> wrong input");
-//                System.out.println("NullPointerException --> getElement() --> invalid parameter: " + clickable);
+                return super.getElement(clickable);
         }
-        return null;
     }
 
     @Override

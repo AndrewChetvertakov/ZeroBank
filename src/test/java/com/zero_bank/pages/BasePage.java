@@ -85,8 +85,6 @@ public abstract class BasePage {
                 case PAY_BILLS_PAGE:
                     PAGE_OBJECT_MAP.put(page, new PayBillsPage());
                     return PAGE_OBJECT_MAP.get(page);
-
-//                "Transfer Funds"
                 default:
                     System.out.println("BasePage --> pageObjectFactory --> Invalid parameter.");
                     System.out.println("NullPointer from pageObjectFactory");

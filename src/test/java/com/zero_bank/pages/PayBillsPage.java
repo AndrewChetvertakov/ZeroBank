@@ -1,11 +1,8 @@
 package com.zero_bank.pages;
 
-import com.zero_bank.utilities.BrowserUtils;
-import com.zero_bank.utilities.Driver;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import com.zero_bank.utilities.*;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.util.Random;
 

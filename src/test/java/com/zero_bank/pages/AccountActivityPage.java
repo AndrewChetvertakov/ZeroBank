@@ -1,10 +1,8 @@
 package com.zero_bank.pages;
 
-import com.zero_bank.utilities.BrowserUtils;
-import com.zero_bank.utilities.Driver;
+import com.zero_bank.utilities.*;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
@@ -22,7 +20,6 @@ public class AccountActivityPage extends BasePage {
     private static final String TYPE_SELECT = "Type Select";
     private static final String DESCRIPTION_FIELD = "Description";
     private static final String NO_RESULTS_MESSAGE = "No Results Message";
-
 
     @FindBy (xpath = "//div[contains(text(), 'No results.')]")
     private WebElement noResultsMessage;
@@ -76,9 +73,8 @@ public class AccountActivityPage extends BasePage {
             case NO_RESULTS_MESSAGE:
                 return noResultsMessage;
             default:
-                super.getElement(clickable);
+               return super.getElement(clickable);
         }
-        return null;
     }
 
     public void clickOnSomething(String clickable) {
@@ -106,18 +102,11 @@ public class AccountActivityPage extends BasePage {
         List<String> strings = listOfDates
                 .stream()
                 .map(WebElement::getText).collect(Collectors.toList());
-
         System.out.println(strings);
-
-/*
-[2012-09-06, 2012-09-05, 2012-09-01]
-
+/*      [2012-09-06, 2012-09-05, 2012-09-01]
         [2012-09-06, <- 6th September
          2012-09-05, <- 5th September
-         2012-09-01] <- 1st September
- */
-
-
+         2012-09-01] <- 1st September        */
         return false;
     }
 

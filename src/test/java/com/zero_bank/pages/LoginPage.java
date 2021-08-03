@@ -3,12 +3,9 @@ package com.zero_bank.pages;
 import com.zero_bank.utilities.Driver;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import java.util.Arrays;
-import java.util.Random;
+import java.util.*;
 
 public class LoginPage extends BasePage {
 
@@ -22,13 +19,6 @@ public class LoginPage extends BasePage {
     private static final String INVALID_CREDENTIALS_MESSAGE = "Invalid Credentials Message";
     private static final String LOGIN_FIELD = "Login Field";
     private static final String PASSWORD_FIELD = "Password Field";
-
-
-
-    @Override
-    public void clickOnSomething(String button) {
-        getElement(button).click();
-    }
 
     @FindBy(id = "user_login")
     private WebElement loginFiled;
@@ -48,6 +38,11 @@ public class LoginPage extends BasePage {
     @FindBy (xpath = "//*[contains(text(), 'Login and/or password are wrong.')]")
     private WebElement errorMessage;
 
+    @Override
+    public void clickOnSomething(String button) {
+        getElement(button).click();
+    }
+
     public WebElement getElement(String clickable){
         switch (clickable){
             case SUBMIT_BUTTON: return submitButton;
@@ -56,18 +51,12 @@ public class LoginPage extends BasePage {
             case INVALID_CREDENTIALS_MESSAGE: return errorMessage;
             case LOGIN_FIELD: return loginFiled;
             case PASSWORD_FIELD: return passwordField;
-
             default: return super.getElement(clickable);
-//                System.out.println("LoginPage --> getElement() --> wrong input");
-//                System.out.println("NullPointerException --> getElement() --> invalid parameter: " + clickable);
         }
-//        return null;
     }
 
-    /**
-     * This method resolves unsecure connection message,
-     * the message happens after every first login on a fresh browser
-     */
+    /** This method resolves unsecure connection message,
+     *  the message happens after every first login on a fresh browser     */
     public void resolveUnsecureConnections(){
         try {
             wait.until(ExpectedConditions.visibilityOf(advanced));
@@ -79,11 +68,9 @@ public class LoginPage extends BasePage {
         }
     }
 
-    /**
-     * this method logs into the application with provided credemtials
-     * @param username
-     * @param password
-     */
+    /** this method logs into the application with provided credemtials
+     *  @param username - username
+     *  @param password -password    */
     public void performLogin(String username, String password){
         loginFiled.sendKeys(username);
         passwordField.sendKeys(password);
@@ -92,8 +79,7 @@ public class LoginPage extends BasePage {
 
     /**
      * This method logs out of application,
-     * only works if user is logged in
-     */
+     * only works if user is logged in     */
     public void performLogOut(){
         clickOnSomething(ZERO_BANK_BUTTON);
         clickOnSomething(USERNAME_DROPDOWN);
@@ -102,14 +88,11 @@ public class LoginPage extends BasePage {
         isLoggedIn = false;
     }
 
-    /**
-     * Helper method for negative login
-     * @return
-     */
+    /** Helper method for negative login
+     *  @return randomly generated String    */
     public boolean errorMessageIsDisplayed(){
         return errorMessage.isDisplayed();
     }
-
     public String randomLetters(int length){
         Random random = new Random();
         char[] randomUser = new char[random.nextInt(length) + 1];
