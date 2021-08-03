@@ -86,9 +86,6 @@ public abstract class BasePage {
                     PAGE_OBJECT_MAP.put(page, new PayBillsPage());
                     return PAGE_OBJECT_MAP.get(page);
 
-
-
-
 //                "Transfer Funds"
                 default:
                     System.out.println("BasePage --> pageObjectFactory --> Invalid parameter.");
