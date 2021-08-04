@@ -6,8 +6,7 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import static com.zero_bank.pages.BasePage.ACCOUNT_SUMMARY_PAGE;
-import static com.zero_bank.pages.BasePage.LOGIN_PAGE;
+import static com.zero_bank.pages.BasePage.*;
 
 public class Navigation_StepDefinitions {
 

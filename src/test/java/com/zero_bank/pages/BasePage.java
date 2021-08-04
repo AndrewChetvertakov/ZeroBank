@@ -116,7 +116,6 @@ public abstract class BasePage {
     }
 
     public String navigationHelperTitles(String page) {
-        String title;
         switch (page) {
             case ACCOUNT_ACTIVITY_PAGE:
                 return "Zero - Account Activity";
@@ -147,7 +146,6 @@ public abstract class BasePage {
     }
 
     public String navigationHelperUrls(String page) {
-        String url;
         switch (page) {
             case ACCOUNT_ACTIVITY_PAGE:
                 return "http://zero.webappsecurity.com/bank/account-activity.html";
