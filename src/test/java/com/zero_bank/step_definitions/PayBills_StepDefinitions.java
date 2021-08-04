@@ -87,7 +87,10 @@ public class PayBills_StepDefinitions {
         page.clearObjects();
     }
 
-
+    /** This method parameterizes Currency fields and checkboxes depending on type of test
+     * @param typeOfTransaction - "successfully" for positive test
+     *                          - "without entering a value" for negative test
+     *                          - "without selecting a currency" for negative test     */
     @When("user tries to calculate cost {string}")
     public void userTriesToCalculateCost(String typeOfTransaction) {
        page = BasePage.pageObjectFactory(PAY_BILLS_PAGE);
@@ -108,7 +111,9 @@ public class PayBills_StepDefinitions {
     page.clearObjects();
     }
 
-    //TODO This method should be refactored to accept any dropDown whatsoever and assert values.
+    /** This method pulls text from alert that pops up after missing a blue in Foreign Currency operations
+     *  And Asserts the text against cucumber table
+     * @param expectedAlertText - expected text from data table     */
     @Then("{string} alert should appear")
     public void alertShouldAppear(String expectedAlertText) {
         page = BasePage.pageObjectFactory(PAY_BILLS_PAGE);
@@ -119,6 +124,9 @@ public class PayBills_StepDefinitions {
         page.clearObjects();
     }
 
+    /** This method asserts text of all options from Currency Selection Dropdown against data table params
+     * @param select - which select as String
+     * @param expectedCurrencies - List<String> from cucumber data table     */
     @Then("{string} should have following currencies available:")
     public void shouldHaveFollowingCurrenciesAvailable(String select, List<String> expectedCurrencies) {
         page = BasePage.pageObjectFactory(PAY_BILLS_PAGE);

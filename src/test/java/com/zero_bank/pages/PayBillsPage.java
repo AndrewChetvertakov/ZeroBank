@@ -173,7 +173,6 @@ public class PayBillsPage extends BasePage{
         clickOnSomething(CALCULATE_COST);
     }
 
-
     public int generateNumber(int length){
         int result = 0;
         int i = 0;

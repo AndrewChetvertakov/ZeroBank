@@ -57,7 +57,7 @@ Feature: Pay Bills Functionalities Tests
       | Singapore (dollar)    |
       | Thailand (baht)       |
 
-  @wip
+  @smoke
   Scenario Outline: Error message for not entering value
     Given the user accesses "Purchase Foreign Currency" tab on "Pay Bills" page
     When user tries to calculate cost "<Type of Test>"
@@ -67,7 +67,7 @@ Feature: Pay Bills Functionalities Tests
       | without entering a value     | Please, ensure that you have filled all the required fields with valid values. |
       | without selecting a currency | Please, ensure that you have filled all the required fields with valid values. |
 
-  @wip
+  @smoke
   Scenario: Successful foreign currency operation
     Given the user accesses "Purchase Foreign Currency" tab on "Pay Bills" page
     When user tries to calculate cost "successfully"
