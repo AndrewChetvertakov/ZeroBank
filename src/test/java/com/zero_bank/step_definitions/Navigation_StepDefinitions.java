@@ -6,6 +6,9 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import static com.zero_bank.pages.BasePage.ACCOUNT_SUMMARY_PAGE;
+import static com.zero_bank.pages.BasePage.LOGIN_PAGE;
+
 public class Navigation_StepDefinitions {
 
     BasePage page;
@@ -20,7 +23,7 @@ public class Navigation_StepDefinitions {
         String currentTitle = Driver.getDriver().getTitle();
         String expectedTitle = page.navigationHelperTitles(pageName);
         if(!currentTitle.equals(expectedTitle)){
-            page = BasePage.pageObjectFactory("Account Summary");
+            page = BasePage.pageObjectFactory(ACCOUNT_SUMMARY_PAGE);
             page.clickOnSomething(pageName);
             page.wait.until(ExpectedConditions.titleContains(page.navigationHelperTitles(pageName)));
             page.wait.until(ExpectedConditions.visibilityOf(page.getElement("Zero Bank")));
@@ -38,7 +41,7 @@ public class Navigation_StepDefinitions {
      * @param pageName <-- constant String from BasePage to call page object and url     */
     @When("user navigates to {string} url")
     public void userNavigatesToUrl(String pageName) {
-        page = BasePage.pageObjectFactory("Login Page");
+        page = BasePage.pageObjectFactory(LOGIN_PAGE);
         Driver.getDriver().get(page.navigationHelperUrls(pageName));
         page.clearObjects();
     }

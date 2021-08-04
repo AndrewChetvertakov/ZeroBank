@@ -14,12 +14,12 @@ public class AccountActivityPage extends BasePage {
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
-    protected static final String SHOW_TRANSACTIONS = "showTransactions";
-    protected static final String FIND_TRANSACTIONS = "Find Transactions";
-    private static final String FIND = "Find";
-    private static final String TYPE_SELECT = "Type Select";
-    private static final String DESCRIPTION_FIELD = "Description";
-    private static final String NO_RESULTS_MESSAGE = "No Results Message";
+    public static final String SHOW_TRANSACTIONS = "showTransactions";
+    public static final String FIND_TRANSACTIONS = "Find Transactions";
+    public static final String FIND = "Find";
+    public static final String TYPE_SELECT = "Type Select";
+    public static final String DESCRIPTION_FIELD = "Description";
+    public static final String NO_RESULTS_MESSAGE = "No Results Message";
 
     @FindBy (xpath = "//div[contains(text(), 'No results.')]")
     private WebElement noResultsMessage;

@@ -56,4 +56,3 @@ Feature: Find Transactions in Account Activity
       | office      |
       | whatever    |
 
-

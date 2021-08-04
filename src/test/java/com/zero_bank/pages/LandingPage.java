@@ -11,9 +11,9 @@ public class LandingPage extends BasePage{
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
-    private static final String HOME_BUTTON = "Account Activity";
-    private static final String ONLINE_BANKING_BUTTON = "Account Summary";
-    private static final String FEEDBACK_BUTTON = "Landing Page";
+    public static final String HOME_BUTTON = "Account Activity";
+    public static final String ONLINE_BANKING_BUTTON = "Account Summary";
+    public static final String FEEDBACK_BUTTON = "Landing Page";
 
     @FindBy (xpath = "//strong[text()='Home']")
     private WebElement homeButton;
@@ -31,6 +31,7 @@ public class LandingPage extends BasePage{
             case FEEDBACK_BUTTON: return feedBackButton;
             case ONLINE_BANKING_BUTTON: return onlineBankingButton;
             default:
+                System.out.println("Redirecting from LandingPage .getElement()");
                 return super.getElement(clickable);
         }
     }

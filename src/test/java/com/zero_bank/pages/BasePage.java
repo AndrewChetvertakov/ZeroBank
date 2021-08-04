@@ -15,24 +15,24 @@ public abstract class BasePage {
 
     public static volatile Boolean isLoggedIn = false;
 
-    protected static final String ACCOUNT_ACTIVITY_PAGE = "Account Activity";
-    protected static final String ACCOUNT_SUMMARY_PAGE = "Account Summary";
-    protected static final String LANDING_PAGE = "Landing Page";
-    protected static final String LOGIN_PAGE = "Login Page";
-    protected static final String TRANSFER_FUNDS_PAGE = "Transfer Funds";
-    protected static final String PAY_BILLS_PAGE = "Pay Bills";
-    protected static final String MY_MONEY_MAP_PAGE = "My Money Map";
-    protected static final String ONLINE_STATEMENTS_PAGE = "Online Statements";
-    protected static final String HELP_PAGE = "Help";
-    protected static final String FREE_ACCESS_TO_ONLINE_BANKING_PAGE = "Free Access to Online Banking";
-    protected static final String FEEDBACK_PAGE = "Contact Us";
+    public static final String ACCOUNT_ACTIVITY_PAGE = "Account Activity";
+    public static final String ACCOUNT_SUMMARY_PAGE = "Account Summary";
+    public static final String LANDING_PAGE = "Landing Page";
+    public static final String LOGIN_PAGE = "Login Page";
+    public static final String TRANSFER_FUNDS_PAGE = "Transfer Funds";
+    public static final String PAY_BILLS_PAGE = "Pay Bills";
+    public static final String MY_MONEY_MAP_PAGE = "My Money Map";
+    public static final String ONLINE_STATEMENTS_PAGE = "Online Statements";
+    public static final String HELP_PAGE = "Help";
+    public static final String FREE_ACCESS_TO_ONLINE_BANKING_PAGE = "Free Access to Online Banking";
+    public static final String FEEDBACK_PAGE = "Contact Us";
 
-    protected static final String SETTINGS_DROPDOWN = "Settings";
-    protected static final String USERNAME_DROPDOWN = "Username";
-    protected static final String SIGN_IN_BUTTON = "signInButton";
-    protected static final String ZERO_BANK_BUTTON = "Zero Bank";
-    protected static final String MY_PROFILE_BUTTON = "My Profile";
-    protected static final String LOGOUT_BUTTON = "Logout";
+    public static final String SETTINGS_DROPDOWN = "Settings";
+    public static final String USERNAME_DROPDOWN = "Username";
+    public static final String SIGN_IN_BUTTON = "signInButton";
+    public static final String ZERO_BANK_BUTTON = "Zero Bank";
+    public static final String MY_PROFILE_BUTTON = "My Profile";
+    public static final String LOGOUT_BUTTON = "Logout";
 
     public WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
 
@@ -86,7 +86,7 @@ public abstract class BasePage {
                     PAGE_OBJECT_MAP.put(page, new PayBillsPage());
                     return PAGE_OBJECT_MAP.get(page);
                 default:
-                    System.out.println("BasePage --> pageObjectFactory --> Invalid parameter.");
+                    System.out.println("BasePage --> pageObjectFactory --> Invalid parameter. " + page);
                     System.out.println("NullPointer from pageObjectFactory");
                     throw new NullPointerException();
             }

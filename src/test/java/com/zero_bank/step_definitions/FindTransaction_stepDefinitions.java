@@ -9,6 +9,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static com.zero_bank.pages.AccountActivityPage.*;
+
 public class FindTransaction_stepDefinitions {
 
     BasePage page;
@@ -30,9 +32,9 @@ public class FindTransaction_stepDefinitions {
      * @param end - end date (this param goes to "to" field"     */
     @When("the user enters date range from {string} to {string}")
     public void theUserEntersDateRangeFromTo(String start, String end) {
-        page = BasePage.pageObjectFactory("Account Activity");
+        page = BasePage.pageObjectFactory(ACCOUNT_ACTIVITY_PAGE);
         ((AccountActivityPage) page).fillInDates(start, end);
-        page.clickOnSomething("Find");
+        page.clickOnSomething(FIND);
         page.clearObjects();
     }
 
@@ -42,7 +44,7 @@ public class FindTransaction_stepDefinitions {
      * @param end - ending date     */
     @Then("results table should only show transactions dates between {string} to {string}")
     public void resultsTableShouldOnlyShowTransactionsDatesBetweenTo(String start, String end) {
-        page = BasePage.pageObjectFactory("Account Activity");
+        page = BasePage.pageObjectFactory(ACCOUNT_ACTIVITY_PAGE);
         Assert.assertTrue(((AccountActivityPage) page).checkRangeOfDates(start, end));
         page.clearObjects();
     }
@@ -66,7 +68,7 @@ public class FindTransaction_stepDefinitions {
      *  @param depostOrWithdrawal - type of column to perform assertion on     */
     @And("results table should show {string} {int} results under {string}")
     public void resultsTableShouldShowResultsUnder(String condition, int numberOfTransactions, String depostOrWithdrawal) {
-        page = BasePage.pageObjectFactory("Account Activity");
+        page = BasePage.pageObjectFactory(ACCOUNT_ACTIVITY_PAGE);
         int i = depostOrWithdrawal.equals("Deposit") ? 3 : 4;  //"Deposit" - 3 and "Withdrawal" - 4
         List<String>  listOfTransactions = Driver.getDriver().findElements(By.xpath(
         "//div[contains(@id, 'filtered_')]/table/thead/tr/th/../../following-sibling::tbody/tr/td[" + i + "]"))
@@ -86,7 +88,7 @@ public class FindTransaction_stepDefinitions {
     @And("the results should be sorted by most recent date")
     public void theResultsShouldBeSortedByMostRecentDate() {
 //        finish THIS
-        page = BasePage.pageObjectFactory("Account Summary");
+        page = BasePage.pageObjectFactory(ACCOUNT_SUMMARY_PAGE);
         ((AccountActivityPage) page).checkIfDatesAreSorted();
         page.clearObjects();
     }
@@ -96,9 +98,9 @@ public class FindTransaction_stepDefinitions {
      * @param description - keyword to search by description     */
     @When("user enters description {string}")
     public void userEntersDescription(String description) {
-        page = BasePage.pageObjectFactory("Account Activity");
-        page.getElement("Description").clear();
-        page.getElement("Description").sendKeys(description);
+        page = BasePage.pageObjectFactory(ACCOUNT_ACTIVITY_PAGE);
+        page.getElement(DESCRIPTION_FIELD).clear();
+        page.getElement(DESCRIPTION_FIELD).sendKeys(description);
         page.clearObjects();
     }
 
@@ -107,7 +109,7 @@ public class FindTransaction_stepDefinitions {
      * @param expectedResult - expected result     */
     @Then("results table should only show results containing {string} keyword")
     public void resultsTableShouldOnlyShowResultsContainingKeyword(String expectedResult) {
-        page = BasePage.pageObjectFactory("Account Activity");
+        page = BasePage.pageObjectFactory(ACCOUNT_ACTIVITY_PAGE);
         List<String>  listOfTransactions = Driver.getDriver().findElements(By.xpath(
             "//div[contains(@id, 'filtered_')]/table/thead/tr/th/../../following-sibling::tbody/tr/td[2]"))
             .stream().map(WebElement::getText)

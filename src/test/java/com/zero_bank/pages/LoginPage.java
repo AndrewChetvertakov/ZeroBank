@@ -13,12 +13,12 @@ public class LoginPage extends BasePage {
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
-    protected static final String SUBMIT_BUTTON = "Submit";
-    private static final String ADVANCED_LINK = "Advanced";
-    private static final String PROCEED_LINK = "Proceed";
-    private static final String INVALID_CREDENTIALS_MESSAGE = "Invalid Credentials Message";
-    private static final String LOGIN_FIELD = "Login Field";
-    private static final String PASSWORD_FIELD = "Password Field";
+    public static final String SUBMIT_BUTTON = "Submit";
+    public static final String ADVANCED_LINK = "Advanced";
+    public static final String PROCEED_LINK = "Proceed";
+    public static final String INVALID_CREDENTIALS_MESSAGE = "Invalid Credentials Message";
+    public static final String LOGIN_FIELD = "Login Field";
+    public static final String PASSWORD_FIELD = "Password Field";
 
     @FindBy(id = "user_login")
     private WebElement loginFiled;

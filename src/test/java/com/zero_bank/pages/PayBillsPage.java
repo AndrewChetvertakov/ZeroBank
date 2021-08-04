@@ -11,21 +11,21 @@ public class PayBillsPage extends BasePage{
     public PayBillsPage(){
         PageFactory.initElements(Driver.getDriver(), this); }
 
-    private static final String PAY_SAVED_PAYEE = "Pay Saved Payee";
-    private static final String ADD_NEW_PAYEE = "Add New Payee";
-    private static final String PURCHASE_FOREIGN_CURRENCY = "Purchase Foreign Currency Bank";
+    public static final String PAY_SAVED_PAYEE = "Pay Saved Payee";
+    public static final String ADD_NEW_PAYEE = "Add New Payee";
+    public static final String PURCHASE_FOREIGN_CURRENCY = "Purchase Foreign Currency Bank";
 
-    private static final String PAYEE_SELECT = "Payee Select";
-    private static final String ACCOUNT_SELECT = "Account Select";
+    public static final String PAYEE_SELECT = "Payee Select";
+    public static final String ACCOUNT_SELECT = "Account Select";
 
-    private static final String AMOUNT_INPUT_FIELD = "Amount";
-    private static final String DATE_INPUT_FIELD = "Date";
-    private static final String DESCRIPTION_INPUT_FIELD = "Description";
-    private static final String PAYMENT_SUCCESS_MESSAGE = "The payment was successfully submitted.";
-    private static final String NEW_PAYEE_CREATED_MESSAGE = "The new payee Pew was successfully created.";
-    private static final String CALENDAR_POPUP = "Calendar";
-    private static final String PAY_BUTTON = "Pay Button";
-    private static final String ADD_BUTTON = "Add";
+    public static final String AMOUNT_INPUT_FIELD = "Amount";
+    public static final String DATE_INPUT_FIELD = "Date";
+    public static final String DESCRIPTION_INPUT_FIELD = "Description";
+    public static final String PAYMENT_SUCCESS_MESSAGE = "The payment was successfully submitted.";
+    public static final String NEW_PAYEE_CREATED_MESSAGE = "The new payee Pew was successfully created.";
+    public static final String CALENDAR_POPUP = "Calendar";
+    public static final String PAY_BUTTON = "Pay Button";
+    public static final String ADD_BUTTON = "Add";
 
     @FindBy (id = "add_new_payee")
     private WebElement addButton;

@@ -7,6 +7,8 @@ import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import static com.zero_bank.pages.BasePage.*;
+
 public class Login_StepDefinitions {
 
     BasePage page;
@@ -15,7 +17,7 @@ public class Login_StepDefinitions {
      * Precondition: user has to be logged in, or Exception happens */
     @When("user logs out of application")
     public void user_logs_out_of_application() {
-        page = BasePage.pageObjectFactory("Login Page");
+        page = BasePage.pageObjectFactory(LOGIN_PAGE);
         ((LoginPage) page).performLogOut();
         page.clearObjects();
     }
@@ -38,8 +40,8 @@ public class Login_StepDefinitions {
      *  And does an assertion through title comparison */
     @When("user tries to login with invalid information")
     public void userTriesToLoginWithInvalidInformation() {
-        page = BasePage.pageObjectFactory("Login Page");
-        String expectedTitle = page.navigationHelperTitles("Login Page");
+        page = BasePage.pageObjectFactory(LOGIN_PAGE);
+        String expectedTitle = page.navigationHelperTitles(LOGIN_PAGE);
         String username = ((LoginPage) page).randomLetters(8);
         String password = ((LoginPage) page).randomLetters(8);
         ((LoginPage) page).performLogin(username, password);
@@ -54,8 +56,8 @@ public class Login_StepDefinitions {
      *  And does an assertion through title comparison */
     @When("user tries to login without entering credentials")
     public void userTriesToLoginWithoutEnteringCredentials() {
-        page = BasePage.pageObjectFactory("Login Page");
-        String expectedTitle = page.navigationHelperTitles("Login Page");
+        page = BasePage.pageObjectFactory(LOGIN_PAGE);
+        String expectedTitle = page.navigationHelperTitles(LOGIN_PAGE);
         ((LoginPage) page).performLogin("", "");
         boolean result = ((LoginPage) page).errorMessageIsDisplayed();
         String actualTitle = Driver.getDriver().getTitle();

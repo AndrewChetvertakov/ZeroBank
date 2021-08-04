@@ -10,13 +10,13 @@ public class AccountSummaryPage extends BasePage{
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
-    protected static final String ACCOUNT_SUMMARY_LINK = ACCOUNT_SUMMARY_PAGE;
-    protected static final String ACCOUNT_ACTIVITY_LINK = ACCOUNT_ACTIVITY_PAGE;
-    protected static final String TRANSFER_FUNDS_LINK = TRANSFER_FUNDS_PAGE;
-    protected static final String PAY_BILLS_LINK = PAY_BILLS_PAGE;
-    protected static final String MY_MONEY_MAP_LINK = MY_MONEY_MAP_PAGE;
-    protected static final String ONLINE_STATEMENTS_LINK = ONLINE_STATEMENTS_PAGE;
-    protected static final String RANDOM_DIV = "Random Div";
+    public static final String ACCOUNT_SUMMARY_LINK = ACCOUNT_SUMMARY_PAGE;
+    public static final String ACCOUNT_ACTIVITY_LINK = ACCOUNT_ACTIVITY_PAGE;
+    public static final String TRANSFER_FUNDS_LINK = TRANSFER_FUNDS_PAGE;
+    public static final String PAY_BILLS_LINK = PAY_BILLS_PAGE;
+    public static final String MY_MONEY_MAP_LINK = MY_MONEY_MAP_PAGE;
+    public static final String ONLINE_STATEMENTS_LINK = ONLINE_STATEMENTS_PAGE;
+    public static final String RANDOM_DIV = "Random Div";
 
     @FindBy (xpath = "//div[@class='span12']")
     public WebElement randomDiv;

@@ -9,6 +9,8 @@ import org.openqa.selenium.*;
 
 import java.util.Map;
 
+import static com.zero_bank.pages.PayBillsPage.*;
+
 public class PayBills_StepDefinitions {
 
     BasePage page;
@@ -19,7 +21,7 @@ public class PayBills_StepDefinitions {
     @Then("{string} message should pop up on {string} page")
     public void messageShouldPopUpOnPage(String message, String pageName) {
         page = BasePage.pageObjectFactory(pageName);
-        String result = page.getElement("Amount").getAttribute("validationMessage");
+        String result = page.getElement(AMOUNT_INPUT_FIELD).getAttribute("validationMessage");
         Assert.assertEquals("Pop Up missing!!" ,message, result);
         page.clearObjects();
     }
@@ -29,7 +31,7 @@ public class PayBills_StepDefinitions {
      *            successfull      missing info     */
     @When("user completes pay operation {string}")
     public void user_completes_pay_operation(String operation) {
-        page = BasePage.pageObjectFactory("Pay Bills");
+        page = BasePage.pageObjectFactory(PAY_BILLS_PAGE);
         Faker faker = new Faker();
         switch (operation) {
             case "successfully":
@@ -55,7 +57,6 @@ public class PayBills_StepDefinitions {
                         "",
                         BrowserUtils.generateStringNumber(3),
                         String.valueOf(faker.phoneNumber()));
-                System.out.println(Driver.getDriver().getPageSource());
                 break;
             case "entering date as text":
                 ((PayBillsPage) page).fillDataForPaySavedPayee("Bank of America", "Checking",
@@ -74,7 +75,7 @@ public class PayBills_StepDefinitions {
      *             and value is used in sendkeys(value)     */
     @And("the user creates new payee using following information:")
     public void theUserCreatesNewPayeeUsingFollowingInformation(Map<String, String> data){
-        page = BasePage.pageObjectFactory("Pay Bills");
+        page = BasePage.pageObjectFactory(PAY_BILLS_PAGE);
         for (String key: data.keySet()) {
             WebElement element = Driver.getDriver().findElement(By.xpath("//*[contains(@id, 'np_new_payee_"+key+"')]"));
             element.sendKeys(data.get(key));

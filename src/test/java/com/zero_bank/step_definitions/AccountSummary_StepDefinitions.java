@@ -9,6 +9,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
+import static com.zero_bank.pages.AccountSummaryPage.*;
+
 public class AccountSummary_StepDefinitions {
 
     BasePage page;
@@ -29,8 +31,8 @@ public class AccountSummary_StepDefinitions {
      * @param expectedAccountTypes - List of expected values that are displayed    */
     @Then("Account summary page should have to following account types:")
     public void account_summary_page_should_have_to_following_account_types(List<String> expectedAccountTypes) {
-        page = BasePage.pageObjectFactory("Account Summary");
-        page.wait.until(ExpectedConditions.visibilityOf(page.getElement("Random Div")));
+        page = BasePage.pageObjectFactory(ACCOUNT_SUMMARY_PAGE);
+        page.wait.until(ExpectedConditions.visibilityOf(page.getElement(RANDOM_DIV)));
         for (String expectedAccountType : expectedAccountTypes) {
             WebElement element = Driver.getDriver().findElement(By.xpath("//h2[text()='" + expectedAccountType + "']"));
             System.out.println(element.getText() + " is displayed? -> " + element.isDisplayed());
@@ -43,8 +45,8 @@ public class AccountSummary_StepDefinitions {
      * @param columns - List of expected values that are displayed     */
     @Then("Credit Accounts table must have columns:")
     public void credit_accounts_table_must_have_columns(List<String> columns) {
-        page = BasePage.pageObjectFactory("Account Summary");
-        page.wait.until(ExpectedConditions.visibilityOf(page.getElement("Random Div")));
+        page = BasePage.pageObjectFactory(ACCOUNT_SUMMARY_PAGE);
+        page.wait.until(ExpectedConditions.visibilityOf(page.getElement(RANDOM_DIV)));
         for (String column : columns) {
             WebElement element = Driver.getDriver()
                 .findElement(By.xpath("(//table[@class='table'])[3]//th[contains(text(), '" + column + "')]"));
