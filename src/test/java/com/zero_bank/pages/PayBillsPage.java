@@ -13,19 +13,45 @@ public class PayBillsPage extends BasePage{
 
     public static final String PAY_SAVED_PAYEE = "Pay Saved Payee";
     public static final String ADD_NEW_PAYEE = "Add New Payee";
-    public static final String PURCHASE_FOREIGN_CURRENCY = "Purchase Foreign Currency Bank";
+    public static final String PURCHASE_FOREIGN_CURRENCY = "Purchase Foreign Currency";
 
     public static final String PAYEE_SELECT = "Payee Select";
     public static final String ACCOUNT_SELECT = "Account Select";
+    public static final String FOREIGN_CURRENCY_SELECT = "Foreign Currency DropDown";
 
     public static final String AMOUNT_INPUT_FIELD = "Amount";
     public static final String DATE_INPUT_FIELD = "Date";
     public static final String DESCRIPTION_INPUT_FIELD = "Description";
     public static final String PAYMENT_SUCCESS_MESSAGE = "The payment was successfully submitted.";
     public static final String NEW_PAYEE_CREATED_MESSAGE = "The new payee Pew was successfully created.";
+    public static final String FOREIGN_CURRENCY_SUCCESS_MESSAGE = "Foreign currency cash was successfully purchased.";
     public static final String CALENDAR_POPUP = "Calendar";
     public static final String PAY_BUTTON = "Pay Button";
     public static final String ADD_BUTTON = "Add";
+    public static final String CALCULATE_COST = "Calculate Cost Button";
+    public static final String US_DOLLAR_CHECKBOX = "US Dollar Checkbox";
+    public static final String SELECTED_CURRENCY_CHECKBOX = "Selected Currency Checkbox";
+    public static final String AMOUNT_CURRENCY_INPUT_FIELD = "Amount Currency";
+    public static final String PURCHASE_CURRENCY_BUTTON = "Purchase Currency Button";
+
+
+    @FindBy (id = "purchase_cash")
+    private WebElement purchaseCash;
+
+    @FindBy (id = "pc_amount")
+    private WebElement amountCurrencyInputField;
+
+    @FindBy (id = "pc_inDollars_false")
+    private WebElement selectedCurrencyCheckBox;
+
+    @FindBy (id = "pc_inDollars_true")
+    private WebElement usDollarCheckBox;
+
+    @FindBy (id = "pc_calculate_costs")
+    private WebElement calculateCostButton;
+
+    @FindBy (id = "pc_currency")
+    private WebElement foreignCurrencySelect;
 
     @FindBy (id = "add_new_payee")
     private WebElement addButton;
@@ -34,7 +60,7 @@ public class PayBillsPage extends BasePage{
     private WebElement paymentSuccessMessage;
 
     @FindBy (id = "alert_content")
-    private WebElement newPayeeCreatedMessage;
+    private WebElement operationSuccessMessage;
 
     @FindBy (xpath = "//a[contains(text(), 'Pay Saved Payee')]")
     private WebElement paySavedPayee;
@@ -95,13 +121,26 @@ public class PayBillsPage extends BasePage{
             case PAYMENT_SUCCESS_MESSAGE:
                 return paymentSuccessMessage;
             case NEW_PAYEE_CREATED_MESSAGE:
-                return newPayeeCreatedMessage;
+            case FOREIGN_CURRENCY_SUCCESS_MESSAGE:
+                return operationSuccessMessage;
             case CALENDAR_POPUP:
                 return calendar;
             case PAY_BUTTON:
                 return payButton;
             case ADD_BUTTON:
                 return addButton;
+            case FOREIGN_CURRENCY_SELECT:
+                return foreignCurrencySelect;
+            case CALCULATE_COST:
+                return calculateCostButton;
+            case US_DOLLAR_CHECKBOX:
+                return usDollarCheckBox;
+            case SELECTED_CURRENCY_CHECKBOX:
+                return selectedCurrencyCheckBox;
+            case AMOUNT_CURRENCY_INPUT_FIELD:
+                return amountCurrencyInputField;
+            case PURCHASE_CURRENCY_BUTTON:
+                return purchaseCash;
             default:
                 return super.getElement(clickable);
         }
@@ -116,11 +155,30 @@ public class PayBillsPage extends BasePage{
         getElement(DESCRIPTION_INPUT_FIELD).sendKeys(description + Keys.ENTER);
     }
 
+    public void purchaseForeignCurrencyParameterization(String visibleText, String amount, String checkbox){
+        BrowserUtils.selectOptions(getElement(FOREIGN_CURRENCY_SELECT), visibleText);
+        getElement(AMOUNT_CURRENCY_INPUT_FIELD).sendKeys(amount);
+        switch (checkbox){
+            case SELECTED_CURRENCY_CHECKBOX:
+                if (getElement(SELECTED_CURRENCY_CHECKBOX).isSelected()) break;
+                else clickOnSomething(SELECTED_CURRENCY_CHECKBOX);
+                break;
+            case US_DOLLAR_CHECKBOX:
+                if (getElement(US_DOLLAR_CHECKBOX).isSelected()) break;
+                else clickOnSomething(US_DOLLAR_CHECKBOX);
+                break;
+            default:
+                System.out.println("Invalid checkbox name in PayBills, Foreign Currency method");
+        }
+        clickOnSomething(CALCULATE_COST);
+    }
+
+
     public int generateNumber(int length){
         int result = 0;
         int i = 0;
         int len = String.valueOf(length).length();
-        while(i < len){
+        while(i++ < len){
             result = result * 10 + length%10;
             length /= 10;
         }

@@ -6,8 +6,12 @@ import com.zero_bank.utilities.*;
 import io.cucumber.java.en.*;
 import org.junit.Assert;
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static com.zero_bank.pages.PayBillsPage.*;
 
@@ -83,4 +87,49 @@ public class PayBills_StepDefinitions {
         page.clearObjects();
     }
 
+
+    @When("user tries to calculate cost {string}")
+    public void userTriesToCalculateCost(String typeOfTransaction) {
+       page = BasePage.pageObjectFactory(PAY_BILLS_PAGE);
+        switch(typeOfTransaction){
+            case "successfully":
+                ((PayBillsPage) page).purchaseForeignCurrencyParameterization("Hong Kong (dollar)", "22.5", SELECTED_CURRENCY_CHECKBOX);
+                page.clickOnSomething(PURCHASE_CURRENCY_BUTTON);
+                page.wait.until(ExpectedConditions.visibilityOf(page.getElement(FOREIGN_CURRENCY_SUCCESS_MESSAGE)));
+                Assert.assertTrue(page.getElement(FOREIGN_CURRENCY_SUCCESS_MESSAGE).isDisplayed());
+                break;
+            case "without entering a value":
+                ((PayBillsPage) page).purchaseForeignCurrencyParameterization("Sweden (krona)", "", US_DOLLAR_CHECKBOX);
+                break;
+            case "without selecting a currency":
+                ((PayBillsPage) page).purchaseForeignCurrencyParameterization("Select One", "750", SELECTED_CURRENCY_CHECKBOX);
+                break;
+        }
+    page.clearObjects();
+    }
+
+    //TODO This method should be refactored to accept any dropDown whatsoever and assert values.
+    @Then("{string} alert should appear")
+    public void alertShouldAppear(String expectedAlertText) {
+        page = BasePage.pageObjectFactory(PAY_BILLS_PAGE);
+        page.wait.until(ExpectedConditions.alertIsPresent());
+        String result = Driver.getDriver().switchTo().alert().getText();
+        Driver.getDriver().switchTo().alert().accept();
+        Assert.assertEquals("Expected and Actual mismatch", result, expectedAlertText);
+        page.clearObjects();
+    }
+
+    @Then("{string} should have following currencies available:")
+    public void shouldHaveFollowingCurrenciesAvailable(String select, List<String> expectedCurrencies) {
+        page = BasePage.pageObjectFactory(PAY_BILLS_PAGE);
+        page.wait.until(ExpectedConditions.visibilityOf(page.getElement(select)));
+        List<String> actualCurrenciesTEXT = new Select(page.getElement(select))
+                        .getOptions()
+                        .stream()
+                        .map(WebElement::getText)
+                        .filter(txt -> !txt.equals("Select One"))
+                        .collect(Collectors.toList());
+        Assert.assertEquals(expectedCurrencies, actualCurrenciesTEXT);
+        page.clearObjects();
+    }
 }

@@ -12,8 +12,6 @@ public class BrowserUtils {
         select.selectByVisibleText(visibleText);
     }
 
-
-
     public static void sleep(int seconds){
 
         seconds = seconds*1000;
@@ -21,7 +19,6 @@ public class BrowserUtils {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
     }
 
     public static int[] stringToIntArray(String date){
@@ -31,7 +28,6 @@ public class BrowserUtils {
         for (int i = 0; i < strings.length; i++) {
             intArr[i] = Integer.parseInt(strings[i]);
         }
-
     return intArr;
     }
 

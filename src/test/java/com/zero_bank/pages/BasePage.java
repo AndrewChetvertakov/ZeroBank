@@ -1,6 +1,9 @@
 package com.zero_bank.pages;
 
 import com.zero_bank.utilities.Driver;
+import com.zero_bank.utilities.NoElementDefinedException;
+import com.zero_bank.utilities.PageNotDefinedException;
+import com.zero_bank.utilities.UnknownParameterException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.*;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -69,26 +72,22 @@ public abstract class BasePage {
                 case ACCOUNT_ACTIVITY_PAGE:
                     PAGE_OBJECT_MAP.put(page, new AccountActivityPage());
                     return PAGE_OBJECT_MAP.get(page);
-
                 case ACCOUNT_SUMMARY_PAGE:
                     PAGE_OBJECT_MAP.put(page, new AccountSummaryPage());
                     return PAGE_OBJECT_MAP.get(page);
-
                 case LANDING_PAGE:
                     PAGE_OBJECT_MAP.put(page, new LandingPage());
                     return PAGE_OBJECT_MAP.get(page);
-
                 case LOGIN_PAGE:
                     PAGE_OBJECT_MAP.put(page, new LoginPage());
                     return PAGE_OBJECT_MAP.get(page);
-
                 case PAY_BILLS_PAGE:
                     PAGE_OBJECT_MAP.put(page, new PayBillsPage());
                     return PAGE_OBJECT_MAP.get(page);
                 default:
-                    System.out.println("BasePage --> pageObjectFactory --> Invalid parameter. " + page);
-                    System.out.println("NullPointer from pageObjectFactory");
-                    throw new NullPointerException();
+                    System.out.println("BasePage --> pageObjectFactory --> Invalid parameter: " + page);
+                    System.out.println("PageNotDefinedException from pageObjectFactory");
+                    throw new PageNotDefinedException(page);
             }
         }
     }
@@ -108,7 +107,7 @@ public abstract class BasePage {
             default:
                 System.out.println("BasePage --> getElement() --> wrong input " + clickable);
                 System.out.println("NoSuchElementException --> getElement() --> invalid parameter: " + clickable);
-                throw new NoSuchElementException();
+                throw new NoElementDefinedException(clickable);
         }
     }
 
@@ -116,129 +115,66 @@ public abstract class BasePage {
         pageObjectFactory(page).clickOnSomething(button);
     }
 
-    protected static final List<String> titles = new ArrayList<>();
-    protected static final List<String> urls = new ArrayList<>();
-
-    private List<String> populateTitles() {
-        if (titles.isEmpty()) {
-            titles.addAll(Arrays.asList(
-                    "Zero - Account Activity",
-                    "Zero - Account Summary",
-                    "Zero - Personal Banking - Loans - Credit Cards",
-                    "Zero - Log in",
-                    "Zero - Transfer Funds",
-                    "Zero - Pay Bills",
-                    "Zero - My Money Map",
-                    "Zero - Online Statements",
-                    "Zero - Help",
-                    "Zero - Free Access to Online Banking",
-                    "Zero - Contact Us"));
-        }
-        return titles;
-    }
-
-    private List<String> populateUrls() {
-        if (urls.isEmpty()) {
-            urls.addAll(Arrays.asList(
-                    "http://zero.webappsecurity.com/bank/account-activity.html",
-                    "http://zero.webappsecurity.com/bank/account-summary.html",
-                    "http://zero.webappsecurity.com/",
-                    "http://zero.webappsecurity.com/login.html",
-                    "http://zero.webappsecurity.com/bank/transfer-funds.html",
-                    "http://zero.webappsecurity.com/bank/pay-bills.html",
-                    "http://zero.webappsecurity.com/bank/money-map.html",
-                    "http://zero.webappsecurity.com/bank/online-statements.html",
-                    "http://zero.webappsecurity.com/help.html",
-                    "http://zero.webappsecurity.com/online-banking.html",
-                    "http://zero.webappsecurity.com/feedback.html"));
-        }
-        return urls;
-    }
-
     public String navigationHelperTitles(String page) {
         String title;
         switch (page) {
             case ACCOUNT_ACTIVITY_PAGE:
-                title = populateTitles().get(0);
-                break;
+                return "Zero - Account Activity";
             case ACCOUNT_SUMMARY_PAGE:
-                title = populateTitles().get(1);
-                break;
+                return "Zero - Account Summary";
             case LANDING_PAGE:
-                title = populateTitles().get(2);
-                break;
+                return "Zero - Personal Banking - Loans - Credit Cards";
             case LOGIN_PAGE:
-                title = populateTitles().get(3);
-                break;
+                return "Zero - Log in";
             case TRANSFER_FUNDS_PAGE:
-                title = populateTitles().get(4);
-                break;
+                return "Zero - Transfer Funds";
             case PAY_BILLS_PAGE:
-                title = populateTitles().get(5);
-                break;
+                return "Zero - Pay Bills";
             case MY_MONEY_MAP_PAGE:
-                title = populateTitles().get(6);
-                break;
+                return "Zero - My Money Map";
             case ONLINE_STATEMENTS_PAGE:
-                title = populateTitles().get(7);
-                break;
+                return "Zero - Online Statements";
             case HELP_PAGE:
-                title = populateTitles().get(8);
-                break;
+                return "Zero - Help";
             case FREE_ACCESS_TO_ONLINE_BANKING_PAGE:
-                title = populateTitles().get(9);
-                break;
+                return "Zero - Free Access to Online Banking";
             case FEEDBACK_PAGE:
-                title = populateTitles().get(10);
-                break;
+                return "Zero - Contact Us";
             default:
-                System.out.println("IllegalArgumentException --> BasePage --> navigationHelperTitles() --> wrong parameter");
-                throw new IllegalArgumentException();
+                System.out.println("UnknownParameterException --> BasePage --> navigationHelperTitles() --> wrong parameter " + page);
+                throw new UnknownParameterException(page);
         }
-        return title;
     }
 
     public String navigationHelperUrls(String page) {
         String url;
         switch (page) {
             case ACCOUNT_ACTIVITY_PAGE:
-                url = populateUrls().get(0);
-                break;
+                return "http://zero.webappsecurity.com/bank/account-activity.html";
             case ACCOUNT_SUMMARY_PAGE:
-                url = populateUrls().get(1);
-                break;
+                return "http://zero.webappsecurity.com/bank/account-summary.html";
             case LANDING_PAGE:
-                url = populateUrls().get(2);
-                break;
+                return "http://zero.webappsecurity.com/";
             case LOGIN_PAGE:
-                url = populateUrls().get(3);
-                break;
+                return "http://zero.webappsecurity.com/login.html";
             case TRANSFER_FUNDS_PAGE:
-                url = populateUrls().get(4);
-                break;
+                return "http://zero.webappsecurity.com/bank/transfer-funds.html";
             case PAY_BILLS_PAGE:
-                url = populateUrls().get(5);
-                break;
+                return "http://zero.webappsecurity.com/bank/pay-bills.html";
             case MY_MONEY_MAP_PAGE:
-                url = populateUrls().get(6);
-                break;
+                return "http://zero.webappsecurity.com/bank/money-map.html";
             case ONLINE_STATEMENTS_PAGE:
-                url = populateUrls().get(7);
-                break;
+                return "http://zero.webappsecurity.com/bank/online-statements.html";
             case HELP_PAGE:
-                url = populateUrls().get(8);
-                break;
+                return "http://zero.webappsecurity.com/help.html";
             case FREE_ACCESS_TO_ONLINE_BANKING_PAGE:
-                url = populateUrls().get(9);
-                break;
+                return "http://zero.webappsecurity.com/online-banking.html";
             case FEEDBACK_PAGE:
-                url = populateUrls().get(10);
-                break;
+                return "http://zero.webappsecurity.com/feedback.html";
             default:
-                System.out.println("IllegalArgumentException --> BasePage --> navigationHelperUrls() --> wrong parameter");
-                throw new IllegalArgumentException();
+                System.out.println("UnknownParameterException --> BasePage --> navigationHelperUrls() --> wrong parameter: " + page);
+                throw new UnknownParameterException(page);
         }
-        return url;
     }
 
 }

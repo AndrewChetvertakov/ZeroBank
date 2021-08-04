@@ -18,7 +18,7 @@ public class FindTransaction_stepDefinitions {
     /** This method clicks on any WebElement on any page:
      * @param button - name of WebElement exactly as a String constant from POM for .getElement()
      * @param pageName - name of any page exactly as a String constant from Pom for .pageObjectFactory() */
-    @When("the user clicks {string} tab/link/button on {string} page")
+    @When("the user clicks/accesses {string} tab/link/button on {string} page")
     public void the_user_enters_date_range_from_to(String button, String pageName) {
         page = BasePage.pageObjectFactory(pageName);
         WebElement element = page.getElement(button);
