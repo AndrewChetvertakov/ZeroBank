@@ -6,8 +6,7 @@ import com.zero_bank.utilities.*;
 import io.cucumber.java.en.*;
 import org.junit.Assert;
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.*;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -119,7 +118,7 @@ public class PayBills_StepDefinitions {
         page.wait.until(ExpectedConditions.alertIsPresent());
         String result = Driver.getDriver().switchTo().alert().getText();
         Driver.getDriver().switchTo().alert().accept();
-        Assert.assertEquals("Expected and Actual mismatch", result, expectedAlertText);
+        Assert.assertEquals("Expected and Actual mismatch", expectedAlertText, result);
         page.clearObjects();
     }
 

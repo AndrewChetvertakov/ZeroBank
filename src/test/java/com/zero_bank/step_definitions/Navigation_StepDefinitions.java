@@ -25,7 +25,7 @@ public class Navigation_StepDefinitions {
             page = BasePage.pageObjectFactory(ACCOUNT_SUMMARY_PAGE);
             page.clickOnSomething(pageName);
             page.wait.until(ExpectedConditions.titleContains(page.navigationHelperTitles(pageName)));
-            page.wait.until(ExpectedConditions.visibilityOf(page.getElement("Zero Bank")));
+            page.wait.until(ExpectedConditions.visibilityOf(page.getElement(ZERO_BANK_BUTTON)));
         }
         Assert.assertEquals("Titles mismatch!",
                 page.navigationHelperTitles(pageName), Driver.getDriver().getTitle());

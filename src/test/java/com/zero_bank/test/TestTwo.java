@@ -1,33 +1,11 @@
 package com.zero_bank.test;
 
-import java.util.Random;
+import java.util.*;
 
 public class TestTwo {
 
     public static void main(String[] args) {
 
-        System.out.println(generateDate());
-        System.out.println(generateDate());
-        System.out.println(generateDate());
-        System.out.println(generateDate());
-        System.out.println(generateDate());
-        System.out.println(generateDate());
-        System.out.println(generateDate());
-        System.out.println(generateDate());
-        System.out.println(generateDate());
-        System.out.println(generateDate());
-        System.out.println(generateDate());
-        System.out.println(generateDate());
-        System.out.println(generateDate());
-        System.out.println(generateDate());
-        System.out.println(generateDate());
-        System.out.println(generateDate());
-        System.out.println(generateDate());
-        System.out.println(generateDate());
-        System.out.println(generateDate());
-        System.out.println(generateDate());
-        System.out.println(generateDate());
-        System.out.println(generateDate());
 
     }
 

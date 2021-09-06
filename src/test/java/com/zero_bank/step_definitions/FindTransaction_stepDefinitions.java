@@ -21,9 +21,16 @@ public class FindTransaction_stepDefinitions {
     @When("the user clicks/accesses {string} tab/link/button on {string} page")
     public void the_user_enters_date_range_from_to(String button, String pageName) {
         page = BasePage.pageObjectFactory(pageName);
+
         WebElement element = page.getElement(button);
+
         page.wait.until(ExpectedConditions.visibilityOf(element));
+
         page.clickOnAnyButtonOnAnyPage(pageName, button);
+
+
+
+
         page.clearObjects();
     }
 
