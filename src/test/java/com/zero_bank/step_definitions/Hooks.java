@@ -1,14 +1,33 @@
 package com.zero_bank.step_definitions;
 
+import com.zero_bank.utilities.DBUtils;
 import com.zero_bank.utilities.Driver;
 import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
-import static com.zero_bank.utilities.BrowserUtils.sleep;
+import java.util.concurrent.TimeUnit;
 
 public class Hooks {
+
+    @Before("@db")
+    public void dbHook() {
+        System.out.println("creating database connection");
+        DBUtils.createConnection();
+    }
+
+    @After("@db")
+    public void afterDbHook() {
+        System.out.println("closing database connection");
+        DBUtils.destroy();
+    }
+
+    @Before("@UI")
+    public void setUp() {
+        Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    }
 
     @After
     public void takeSceenshot_andTearDown(Scenario scenario){
