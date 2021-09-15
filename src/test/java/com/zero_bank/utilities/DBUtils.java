@@ -22,9 +22,9 @@ public class DBUtils {
     }
 
     public static void createConnection() {
-        String dbUrl = "jdbc:oracle:thin:@44.195.19.167:1521:XE";
-        String dbUsername = "hr";
-        String dbPassword = "hr";
+        String dbUrl = "";
+        String dbUsername = "";
+        String dbPassword = "";
         try {
             connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
         } catch (SQLException e) {
