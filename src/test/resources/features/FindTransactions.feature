@@ -7,7 +7,7 @@ Feature: Find Transactions in Account Activity
     And user navigates to "Account Activity" page
     Given the user clicks "Find Transactions" tab on "Account Activity" page
 
-  @smoke @B225-265
+  @smoke @B501-243
   Scenario Outline: Search date range
     When the user enters date range from "<start date>" to "<end date>"
     And the user clicks "Find" tab on "Account Activity" page
